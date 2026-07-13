@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          # Creates the Pages site when this is the repository's first deployment.
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
