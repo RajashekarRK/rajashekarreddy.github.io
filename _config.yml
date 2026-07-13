@@ -1,0 +1,21 @@
+# _config.yml — drrsr.com
+title: Rajashekar Reddy Konduru
+description: Building and scaling profitable education businesses — and the operating systems that keep them running.
+url: https://drrsr.com
+baseurl: ""
+lang: en
+markdown: kramdown
+permalink: /blog/:title/
+include: [_pages]
+exclude: [Gemfile, Gemfile.lock, README.md, vendor, node_modules]
+keep_files: [CNAME, .nojekyll]
+
+# Jekyll settings for GitHub Pages
+theme: null
+plugins: []
+
+defaults:
+  - scope: { path: "" }
+    values: { layout: "default" }
+  - scope: { path: "_posts" }
+    values: { layout: "post" }
