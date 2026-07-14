@@ -993,27 +993,23 @@ if(!isTouch){
 
 // Audio
 const AC=w.AudioContext||w.webkitAudioContext;
-let ac=null, masterGain=null, soundEnabled=true, audioUnlocked=false, omTimer=null;
+let ac=null, masterGain=null, soundEnabled=true, audioUnlocked=false, omTimer=null, omAudio=null;
 const sectionVolumes={hero:0,about:0,work:0,writing:0,contact:0};
 function initAudio(){
   if(!AC) return;
-  if(ac){ if(ac.state==='suspended') ac.resume(); return; }
-  ac=new AC();
-  masterGain=ac.createGain(); masterGain.gain.value=1; masterGain.connect(ac.destination);
-  ac.resume(); scheduleOmPulse(); audioUnlocked=true;
+  if(!ac){ac=new AC();masterGain=ac.createGain();masterGain.gain.value=1;masterGain.connect(ac.destination);}
+  if(ac.state==='suspended') ac.resume();
+  if(!omAudio){omAudio=new Audio('assets/audio/cosmic-om.wav');omAudio.preload='auto';omAudio.volume=.05;}
+  if(!audioUnlocked){audioUnlocked=true;scheduleOmPulse(1200);}
 }
 function playOmPulse(){
-  if(!ac || !soundEnabled) return;
-  const now=ac.currentTime, duration=3, omGain=ac.createGain();
-  omGain.gain.setValueAtTime(.0001,now); omGain.gain.linearRampToValueAtTime(.05,now+.18); omGain.gain.setValueAtTime(.05,now+2.25); omGain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-  const toneFilter=ac.createBiquadFilter(); toneFilter.type='lowpass'; toneFilter.frequency.value=430; toneFilter.Q.value=.4;
-  [[136.1,.58],[203.8,.18],[272.2,.1]].forEach(([frequency,level])=>{const oscillator=ac.createOscillator(), gain=ac.createGain();oscillator.type='sine';oscillator.frequency.value=frequency;gain.gain.value=level;oscillator.connect(gain);gain.connect(toneFilter);oscillator.start(now);oscillator.stop(now+duration+.04);});
-  toneFilter.connect(omGain); omGain.connect(masterGain);
+  if(!omAudio || !soundEnabled) return;
+  omAudio.pause(); omAudio.currentTime=0; omAudio.volume=.05; omAudio.play().catch(()=>{});
 }
-function scheduleOmPulse(){
+function scheduleOmPulse(delay=0){
   if(omTimer) clearTimeout(omTimer);
   const cycle=()=>{if(!soundEnabled) return;playOmPulse();omTimer=setTimeout(cycle,13000);};
-  cycle();
+  omTimer=setTimeout(cycle,delay);
 }
 function updateDroneVolumes(){}
 function playDamaruTap(){
@@ -1028,7 +1024,7 @@ function playDamaruTap(){
 }
 const soundBtn=$('.nav-sound');
 function updateSoundIcon(){ soundBtn.classList.toggle('mute',!soundEnabled); soundBtn.querySelector('.snd-on').style.display=soundEnabled?'block':'none'; soundBtn.querySelector('.snd-off').style.display=soundEnabled?'none':'block'; }
-function toggleSound(){ soundEnabled=!soundEnabled; initAudio(); if(ac && masterGain) masterGain.gain.setTargetAtTime(soundEnabled?1:0, ac.currentTime, .1); if(soundEnabled) scheduleOmPulse(); else if(omTimer){clearTimeout(omTimer);omTimer=null;} updateSoundIcon(); }
+function toggleSound(){ soundEnabled=!soundEnabled; initAudio(); if(ac && masterGain) masterGain.gain.setTargetAtTime(soundEnabled?1:0, ac.currentTime, .1); if(soundEnabled) scheduleOmPulse(800); else {if(omTimer){clearTimeout(omTimer);omTimer=null;} if(omAudio){omAudio.pause();omAudio.currentTime=0;}} updateSoundIcon(); }
 soundBtn.addEventListener('click',toggleSound);
 w.addEventListener('keydown',e=>{ if(e.key.toLowerCase()==='m') toggleSound(); });
 $$('a,button,.card,.bcard,.ctl,.tag,.aw,.edu,.stat,.sf,.pub-card').forEach(el=>{ el.addEventListener('click',()=>{ initAudio(); playDamaruTap(); }); el.addEventListener('touchstart',initAudio,{passive:true}); });
