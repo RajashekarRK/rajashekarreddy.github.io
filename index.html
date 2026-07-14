@@ -1028,6 +1028,7 @@ $$('a,button,.card,.bcard,.ctl,.tag,.aw,.edu,.stat,.sf,.pub-card').forEach(el=>{
 
 // Three.js
 let sceneWeight={hero:1,about:0,work:0,writing:0,contact:0};
+let sceneStarDensity=.16, targetStarDensity=.16;
 function initThree(){
   if(prefersReduced || !w.THREE) return;
   try{
@@ -1060,10 +1061,11 @@ function initThree(){
   const celestial=[];
   function addCelestial(pos,radius,color,depth,ring){
     const group=new THREE.Group(); group.position.set(...pos);
-    const body=new THREE.Mesh(new THREE.SphereGeometry(radius,18,18),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.16})); group.add(body);
-    const halo=new THREE.Mesh(new THREE.SphereGeometry(radius*1.12,16,16),new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity:.11,depthWrite:false})); group.add(halo);
-    if(ring){const orbit=new THREE.Mesh(new THREE.TorusGeometry(radius*1.55,.018,6,48),new THREE.MeshBasicMaterial({color:0x9fc5ff,transparent:true,opacity:.16}));orbit.rotation.set(.9,.25,.18);group.add(orbit);}
-    scene.add(group); celestial.push({group,basePos:pos,depth});
+    const body=new THREE.Mesh(new THREE.SphereGeometry(radius,18,18),new THREE.MeshBasicMaterial({color,transparent:true,opacity:0})); body.material.userData.baseOpacity=.16; group.add(body);
+    const halo=new THREE.Mesh(new THREE.SphereGeometry(radius*1.12,16,16),new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity:0,depthWrite:false})); halo.material.userData.baseOpacity=.11; group.add(halo);
+    const materials=[body.material,halo.material];
+    if(ring){const orbit=new THREE.Mesh(new THREE.TorusGeometry(radius*1.55,.018,6,48),new THREE.MeshBasicMaterial({color:0x9fc5ff,transparent:true,opacity:0}));orbit.material.userData.baseOpacity=.16;orbit.rotation.set(.9,.25,.18);group.add(orbit);materials.push(orbit.material);}
+    scene.add(group); celestial.push({group,basePos:pos,depth,materials});
   }
   addCelestial([-13,8,-15],.72,0x5e86dc,.18,true);
   addCelestial([11,6,-13],.46,0x34bffd,.11,false);
@@ -1073,10 +1075,11 @@ function initThree(){
     const hues=[new THREE.Color(0xffffff),new THREE.Color(0xbfe4ff),new THREE.Color(0x9fc5ff),new THREE.Color(0x6f9be6)];
     for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*spread;positions[i*3+1]=(Math.random()-.5)*spread*.72;positions[i*3+2]=-12-Math.random()*spread;const hue=hues[Math.floor(Math.random()*hues.length)];colors[i*3]=hue.r;colors[i*3+1]=hue.g;colors[i*3+2]=hue.b;}
     geo.setAttribute('position',new THREE.BufferAttribute(positions,3));geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
-    const stars=new THREE.Points(geo,new THREE.PointsMaterial({size,transparent:true,opacity,blending:THREE.AdditiveBlending,depthWrite:false,vertexColors:true}));scene.add(stars);starFields.push({stars,depth});
+    const stars=new THREE.Points(geo,new THREE.PointsMaterial({size,transparent:true,opacity:opacity*sceneStarDensity,blending:THREE.AdditiveBlending,depthWrite:false,vertexColors:true}));scene.add(stars);starFields.push({stars,depth,baseOpacity:opacity});
   }
-  addStarField(w.innerWidth<768?420:900,105,.055,.72,.05);
-  addStarField(w.innerWidth<768?110:220,58,.13,.62,.16);
+  addStarField(w.innerWidth<768?420:900,105,.055,.62,.05);
+  addStarField(w.innerWidth<768?110:220,58,.13,.68,.16);
+  addStarField(w.innerWidth<768?90:180,72,.19,.78,.24);
   const pCount=w.innerWidth<768?300:620;
   const pGeo=new THREE.BufferGeometry();
   const pPos=new Float32Array(pCount*3), pBaseY=new Float32Array(pCount), pSize=new Float32Array(pCount), pColor=new Float32Array(pCount*3);
@@ -1098,8 +1101,9 @@ function initThree(){
     for(let i=0;i<pCount;i++){ positions[i*3+1]=pBaseY[i]+Math.sin(time*.3+i)*.18; }
     pGeo.attributes.position.needsUpdate=true;
     objs.forEach((o,i)=>{ o.m.rotation.x+=o.rs[0]; o.m.rotation.y+=o.rs[1]; o.m.rotation.z+=o.rs[2]; o.m.position.y=o.basePos[1]+Math.sin(time*.4+i)*.8; });
-    starFields.forEach((field,index)=>{field.stars.rotation.y+=.000025*(index+1);field.stars.position.x=tx*field.depth;field.stars.position.y=-ty*field.depth;});
-    celestial.forEach((item,index)=>{item.group.rotation.y+=.0015+index*.0004;item.group.rotation.x+=.00025;item.group.position.x=item.basePos[0]+tx*item.depth;item.group.position.y=item.basePos[1]-ty*item.depth+Math.sin(time*.22+index)*.35;});
+    pMat.opacity=.16+sceneStarDensity*.38;
+    starFields.forEach((field,index)=>{field.stars.rotation.y+=.000025*(index+1);field.stars.position.x=tx*field.depth;field.stars.position.y=-ty*field.depth;field.stars.material.opacity=field.baseOpacity*(.18+sceneStarDensity*.82);});
+    celestial.forEach((item,index)=>{item.group.rotation.y+=.0015+index*.0004;item.group.rotation.x+=.00025;item.group.position.x=item.basePos[0]+tx*item.depth;item.group.position.y=item.basePos[1]-ty*item.depth+Math.sin(time*.22+index)*.35;item.materials.forEach(material=>{material.opacity=material.userData.baseOpacity*(.12+sceneStarDensity*.88);});});
     bigSphere.rotation.y+=.0004; bigSphere.rotation.x+=.0002;
     midSphere.rotation.y+=.0003; midSphere.rotation.z+=.00015;
     const total=Math.max(.001, sceneWeight.hero+sceneWeight.about+sceneWeight.work+sceneWeight.writing+sceneWeight.contact);
@@ -1248,6 +1252,7 @@ function initAnimations(){
 
   const sections=['hero','about','services','impact','work','education','skills','publications','projects','cases','repositories','simulations','books','chapters','news','media','conferences','awards','writing','references','thesis','contact'];
   const sectionAudioMap={hero:'hero',about:'about',services:'about',impact:'work',work:'work',education:'work',skills:'work',publications:'writing',projects:'writing',cases:'work',repositories:'writing',simulations:'writing',books:'writing',chapters:'writing',news:'writing',media:'writing',conferences:'writing',awards:'work',writing:'writing',references:'writing',thesis:'writing',contact:'contact'};
+  const sectionStarMap={hero:.16,about:.25,services:.32,impact:.42,work:.48,education:.53,skills:.58,publications:.63,projects:.68,cases:.64,repositories:.7,simulations:.74,books:.76,chapters:.78,news:.8,media:.82,conferences:.84,awards:.86,writing:.9,references:.78,thesis:.9,contact:1};
   const targetWeights={hero:1,about:0,work:0,writing:0,contact:0};
   let activeId='hero';
   function computeActive(){
@@ -1259,12 +1264,13 @@ function initAnimations(){
       $$('.sec-nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+activeId));
       const audioId=sectionAudioMap[activeId];
       Object.keys(targetWeights).forEach(k=>targetWeights[k]=k===audioId?1:0);
+      targetStarDensity=sectionStarMap[activeId]??.5;
       Object.keys(sectionVolumes).forEach(k=>sectionVolumes[k]=k===audioId?.2:0);
       updateDroneVolumes();
     }
   }
   w.addEventListener('scroll',computeActive,{passive:true}); computeActive();
-  gsap.ticker.add(()=>{ Object.keys(sceneWeight).forEach(k=>{ sceneWeight[k]+=(targetWeights[k]-sceneWeight[k])*.04; }); });
+  gsap.ticker.add(()=>{ Object.keys(sceneWeight).forEach(k=>{ sceneWeight[k]+=(targetWeights[k]-sceneWeight[k])*.04; }); sceneStarDensity+=(targetStarDensity-sceneStarDensity)*.025; });
 
   let lastScroll=0;
   w.addEventListener('scroll',()=>{
