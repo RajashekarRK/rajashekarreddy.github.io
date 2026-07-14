@@ -363,6 +363,8 @@ h3{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;line-height:1.25}
 @media (max-width:900px){.contact-grid{grid-template-columns:1fr}.contact-globe{min-height:360px;order:-1}.contact-globe canvas{width:340px;height:340px}}
 @media (max-width:600px){.contact-heading{margin-bottom:var(--space-lg)}.contact-globe{min-height:290px}.contact-globe canvas{width:270px;height:270px}}
 
+.signals-intro{max-width:760px;margin:-22px 0 var(--space-lg);color:var(--text-2);font-size:1.02rem;line-height:1.7}.signals-shell{position:relative;padding:clamp(18px,3vw,34px);border:1px solid rgba(159,197,255,.14);border-radius:var(--radius-lg);background:linear-gradient(145deg,rgba(12,32,54,.8),rgba(6,18,32,.66));box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 22px 55px rgba(0,0,0,.18);overflow:hidden}.signals-shell::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 88% 14%,rgba(52,191,253,.13),transparent 28%),linear-gradient(110deg,transparent 45%,rgba(159,197,255,.03) 45.2%,transparent 45.5%)}.signal-rail,.signal-detail{position:relative;z-index:1}.signal-rail{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;padding-bottom:var(--space-lg)}.signal-rail::before{content:'';position:absolute;top:54px;right:5%;left:5%;height:1px;background:linear-gradient(90deg,transparent,rgba(159,197,255,.32) 8%,rgba(159,197,255,.32) 92%,transparent);pointer-events:none}.signal-tab{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;padding:0 4px 10px;border:1px solid transparent;border-radius:var(--radius-md);color:var(--text-3);text-align:center;transition:color .25s,background .25s,border-color .25s,transform .25s}.signal-tab:hover,.signal-tab[aria-selected="true"]{border-color:rgba(159,197,255,.25);background:rgba(159,197,255,.07);color:var(--text);transform:translateY(-4px)}.signal-year{color:var(--cream-400);font:.68rem/1 'JetBrains Mono',monospace;letter-spacing:.05em}.signal-logo{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(159,197,255,.2);border-radius:50%;background:rgba(237,245,255,.96);overflow:hidden;box-shadow:0 7px 18px rgba(0,0,0,.28);transition:border-color .25s,box-shadow .25s,transform .25s}.signal-logo img{width:100%;height:100%;object-fit:contain;padding:7px}.signal-tab[aria-selected="true"] .signal-logo{border-color:var(--cream-400);box-shadow:0 0 0 4px rgba(159,197,255,.12),0 8px 22px rgba(0,0,0,.35);transform:scale(1.08)}.signal-label{min-height:2.5em;display:grid;place-items:center;font-size:.7rem;font-weight:700;line-height:1.25}.signal-detail{display:grid;grid-template-columns:86px minmax(0,1fr) minmax(170px,.55fr);gap:clamp(16px,2.5vw,30px);align-items:center;padding-top:var(--space-lg);border-top:1px solid rgba(159,197,255,.12)}.signal-detail-logo{width:86px;height:86px;display:grid;place-items:center;border:1px solid rgba(159,197,255,.18);border-radius:var(--radius-md);background:rgba(237,245,255,.96);overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.22)}.signal-detail-logo img{width:100%;height:100%;object-fit:contain;padding:10px}.signal-detail-kicker{margin-bottom:6px;color:var(--cream-400);font:.7rem/1.25 'JetBrains Mono',monospace;letter-spacing:.09em;text-transform:uppercase}.signal-detail h3{margin-bottom:7px;font-size:1.2rem}.signal-detail p{margin:0;color:var(--text-2);font-size:.9rem;line-height:1.62}.signal-metric{padding:14px 16px;border-left:2px solid var(--cyan);background:rgba(52,191,253,.06);color:var(--text-2);font-size:.82rem;line-height:1.5}.signal-metric strong{display:block;margin-bottom:4px;color:var(--cream-400);font:.7rem/1.2 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.signal-detail.is-updating>div{animation:signal-detail-in .34s var(--ease-out-expo)}@keyframes signal-detail-in{from{opacity:.28;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media (max-width:900px){.signal-rail{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:18px}.signal-rail::before{display:none}.signal-detail{grid-template-columns:72px minmax(0,1fr)}.signal-metric{grid-column:1 / -1}.signal-detail-logo{width:72px;height:72px}}@media (max-width:600px){.signals-intro{margin:-12px 0 var(--space-md);font-size:.94rem}.signals-shell{padding:16px}.signal-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-bottom:var(--space-md)}.signal-tab{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px;padding:9px;text-align:left}.signal-year{grid-column:2}.signal-logo{grid-row:1 / span 2;width:44px;height:44px}.signal-label{min-height:0;display:block;font-size:.72rem}.signal-detail{grid-template-columns:1fr;gap:14px;padding-top:var(--space-md)}.signal-detail-logo{width:64px;height:64px}.signal-metric{grid-column:auto}}@media (prefers-reduced-motion:reduce){.signal-tab,.signal-logo{transition:none}.signal-detail.is-updating>div{animation:none}}
+
 footer{text-align:center;padding:var(--space-xl) var(--space-md);color:var(--text-3);font-size:.8rem}
 footer .c{color:var(--cream-400)}
 
@@ -550,6 +552,7 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
     <a href="#thesis" data-cursor="arrow"><span class="mn">19</span>Thesis</a>
     <a href="#career-atlas" data-cursor="arrow"><span class="mn">20</span>Career Atlas</a>
     <a href="#contact" data-cursor="arrow"><span class="mn">21</span>Contact</a>
+    <a href="#leadership-signals" data-cursor="arrow"><span class="mn">22</span>Leadership Signals</a>
   </div>
 </div>
 
@@ -1023,6 +1026,29 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
   </div>
 </section>
 
+<section class="sec" id="leadership-signals" aria-labelledby="leadership-signals-title">
+  <div class="eyebrow rev">22 — Journey</div>
+  <h2 id="leadership-signals-title" class="word-rev"><span class="w"><span>Leadership</span></span> <span class="w"><span class="c">Signals</span></span></h2>
+  <p class="signals-intro rev">Eight verified inflection points, from early technical formation to a scalable executive-education operating system. Select a signal to see the evidence behind it.</p>
+  <div class="signals-shell rev" id="signals-shell">
+    <div class="signal-rail" role="tablist" aria-label="Leadership journey signals">
+      <button type="button" class="signal-tab" role="tab" aria-selected="true" aria-controls="signal-detail" data-signal data-kicker="Technical foundation · Bengaluru · 1999" data-title="Technology, systems and first principles" data-description="Early study in electronics, mathematics, and computer science established the analytical and technical base that now informs education, operations, and digital transformation work." data-metric="B.Sc. Electronics & Mathematics and GNIIT Computer Science foundation." data-image="assets/logos/mes-college-bangalore.png" data-alt="M.E.S. College, Bangalore"><span class="signal-year">1999</span><span class="signal-logo"><img src="assets/logos/mes-college-bangalore.png" alt="M.E.S. College, Bangalore" loading="lazy"></span><span class="signal-label">Technical foundation</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Capability building · Dell · 2002–2007" data-title="Learning at enterprise scale" data-description="Managed training and development in a global technology environment, combining operational discipline with practical learning experience design." data-metric="Reduced new-hire ramp time by 28%; Manila site-launch specialist and Dell Master Trainer." data-image="assets/logos/dell.com.svg" data-alt="Dell"><span class="signal-year">2002</span><span class="signal-logo"><img src="assets/logos/dell.com.svg" alt="Dell" loading="lazy"></span><span class="signal-label">Enterprise learning</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="MBA · United Kingdom · 2007–2009" data-title="Broadening into business leadership" data-description="A full-time MBA on scholarship added a management and commercial lens to an already technical and operational career foundation." data-metric="Sir Patrick Stewart Scholarship, University of Huddersfield Business School." data-image="assets/logos/hud.ac.uk.svg" data-alt="University of Huddersfield"><span class="signal-year">2007</span><span class="signal-logo"><img src="assets/logos/hud.ac.uk.svg" alt="University of Huddersfield" loading="lazy"></span><span class="signal-label">Business leadership</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Learning & development · TCS · 2010–2014" data-title="Scaling capability through systems" data-description="Led learning and development for analytics and KPO teams, translating large-scale capability needs into digitally enabled delivery and operational efficiency." data-metric="Managed L&D for 750+ associates; training digitisation delivered about Rs 2 crore in savings." data-image="assets/logos/tcs.com.svg" data-alt="Tata Consultancy Services"><span class="signal-year">2010</span><span class="signal-logo"><img src="assets/logos/tcs.com.svg" alt="Tata Consultancy Services" loading="lazy"></span><span class="signal-label">Scale with systems</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Executive education · ISB · 2014–2021" data-title="Growth through executive education" data-description="Combined P&L accountability, portfolio design, enterprise account development, and digital customer experience to scale complex executive-learning businesses." data-metric="About 200% year-over-year custom executive-education revenue growth and 300% more B2B nominations." data-image="assets/logos/isb.edu.svg" data-alt="Indian School of Business"><span class="signal-year">2014</span><span class="signal-logo"><img src="assets/logos/isb.edu.svg" alt="Indian School of Business" loading="lazy"></span><span class="signal-label">Executive education</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Global management · ISB–Kellogg · 2018" data-title="A global management perspective" data-description="Advanced management study through the ISB-Kellogg Global Advanced Management Programme reinforced the link between strategic decision-making and institution-building." data-metric="Scaled the ISB-Kellogg GAMP cohort from 35 to 60, delivering 150% revenue growth." data-image="assets/logos/kellogg-school-of-management.png" data-alt="Kellogg School of Management"><span class="signal-year">2018</span><span class="signal-logo"><img src="assets/logos/kellogg-school-of-management.png" alt="Kellogg School of Management" loading="lazy"></span><span class="signal-label">Global perspective</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Centre leadership · Great Lakes · 2021–present" data-title="Leading an institution to grow" data-description="Owns an Executive Education Centre P&L while building its portfolio, commercial engine, partnerships, operating discipline, and senior team." data-metric="250% revenue growth in three years and 32+ corporate partnerships at 85% retention." data-image="assets/logos/greatlakes.edu.png" data-alt="Great Lakes Institute of Management"><span class="signal-year">2021</span><span class="signal-logo"><img src="assets/logos/greatlakes.edu.png" alt="Great Lakes Institute of Management" loading="lazy"></span><span class="signal-label">Institution leadership</span></button>
+      <button type="button" class="signal-tab" role="tab" aria-selected="false" aria-controls="signal-detail" data-signal data-kicker="Operating platform · Present" data-title="Codifying what scales" data-description="Executive Education OS turns the accumulated practice of business building, enrolment, delivery, faculty operations, and analytics into a repeatable operating system." data-metric="A self-built platform spanning lead generation through delivery, operations, and analytics." data-image="assets/logos/execedos.com.svg" data-alt="Executive Education OS"><span class="signal-year">Now</span><span class="signal-logo"><img src="assets/logos/execedos.com.svg" alt="Executive Education OS" loading="lazy"></span><span class="signal-label">Codify for scale</span></button>
+    </div>
+    <div class="signal-detail" id="signal-detail" role="tabpanel" tabindex="0" aria-live="polite" aria-atomic="true">
+      <div class="signal-detail-logo"><img src="assets/logos/mes-college-bangalore.png" alt="M.E.S. College, Bangalore" data-signal-image></div>
+      <div><div class="signal-detail-kicker" data-signal-kicker>Technical foundation · Bengaluru · 1999</div><h3 data-signal-title>Technology, systems and first principles</h3><p data-signal-description>Early study in electronics, mathematics, and computer science established the analytical and technical base that now informs education, operations, and digital transformation work.</p></div>
+      <div class="signal-metric"><strong>Evidence</strong><span data-signal-metric>B.Sc. Electronics &amp; Mathematics and GNIIT Computer Science foundation.</span></div>
+    </div>
+  </div>
+</section>
+
 <footer class="rev">
   <div class="footer-grid">
     <div>
@@ -1053,7 +1079,7 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
 </main>
 
 <div class="sec-nav" aria-label="Section navigation">
-  <a href="#about" data-cursor="circle" data-label="About" aria-label="Go to About"></a><a href="#services" data-cursor="circle" data-label="Services" aria-label="Go to Services"></a><a href="#impact" data-cursor="circle" data-label="Impact" aria-label="Go to Selected Impact"></a><a href="#work" data-cursor="circle" data-label="Work" aria-label="Go to Work"></a><a href="#education" data-cursor="circle" data-label="Education" aria-label="Go to Education"></a><a href="#skills" data-cursor="circle" data-label="Skills" aria-label="Go to Skills"></a><a href="#publications" data-cursor="circle" data-label="Research" aria-label="Go to Research"></a><a href="#projects" data-cursor="circle" data-label="Projects" aria-label="Go to Projects"></a><a href="#cases" data-cursor="circle" data-label="Cases" aria-label="Go to Cases"></a><a href="#repositories" data-cursor="circle" data-label="Code" aria-label="Go to Code"></a><a href="#simulations" data-cursor="circle" data-label="Simulations" aria-label="Go to Simulations"></a><a href="#books" data-cursor="circle" data-label="Books" aria-label="Go to Books"></a><a href="#chapters" data-cursor="circle" data-label="Chapters" aria-label="Go to Chapters"></a><a href="#news" data-cursor="circle" data-label="News" aria-label="Go to News"></a><a href="#media" data-cursor="circle" data-label="Media" aria-label="Go to Media"></a><a href="#conferences" data-cursor="circle" data-label="Conferences" aria-label="Go to Conferences"></a><a href="#awards" data-cursor="circle" data-label="Awards" aria-label="Go to Awards"></a><a href="#writing" data-cursor="circle" data-label="Writing" aria-label="Go to Writing"></a><a href="#references" data-cursor="circle" data-label="References" aria-label="Go to References"></a><a href="#thesis" data-cursor="circle" data-label="Thesis" aria-label="Go to Thesis"></a><a href="#career-atlas" data-cursor="circle" data-label="Career Atlas" aria-label="Go to Career Atlas"></a><a href="#contact" data-cursor="circle" data-label="Contact" aria-label="Go to Contact"></a>
+  <a href="#about" data-cursor="circle" data-label="About" aria-label="Go to About"></a><a href="#services" data-cursor="circle" data-label="Services" aria-label="Go to Services"></a><a href="#impact" data-cursor="circle" data-label="Impact" aria-label="Go to Selected Impact"></a><a href="#work" data-cursor="circle" data-label="Work" aria-label="Go to Work"></a><a href="#education" data-cursor="circle" data-label="Education" aria-label="Go to Education"></a><a href="#skills" data-cursor="circle" data-label="Skills" aria-label="Go to Skills"></a><a href="#publications" data-cursor="circle" data-label="Research" aria-label="Go to Research"></a><a href="#projects" data-cursor="circle" data-label="Projects" aria-label="Go to Projects"></a><a href="#cases" data-cursor="circle" data-label="Cases" aria-label="Go to Cases"></a><a href="#repositories" data-cursor="circle" data-label="Code" aria-label="Go to Code"></a><a href="#simulations" data-cursor="circle" data-label="Simulations" aria-label="Go to Simulations"></a><a href="#books" data-cursor="circle" data-label="Books" aria-label="Go to Books"></a><a href="#chapters" data-cursor="circle" data-label="Chapters" aria-label="Go to Chapters"></a><a href="#news" data-cursor="circle" data-label="News" aria-label="Go to News"></a><a href="#media" data-cursor="circle" data-label="Media" aria-label="Go to Media"></a><a href="#conferences" data-cursor="circle" data-label="Conferences" aria-label="Go to Conferences"></a><a href="#awards" data-cursor="circle" data-label="Awards" aria-label="Go to Awards"></a><a href="#writing" data-cursor="circle" data-label="Writing" aria-label="Go to Writing"></a><a href="#references" data-cursor="circle" data-label="References" aria-label="Go to References"></a><a href="#thesis" data-cursor="circle" data-label="Thesis" aria-label="Go to Thesis"></a><a href="#career-atlas" data-cursor="circle" data-label="Career Atlas" aria-label="Go to Career Atlas"></a><a href="#contact" data-cursor="circle" data-label="Contact" aria-label="Go to Contact"></a><a href="#leadership-signals" data-cursor="circle" data-label="Leadership Signals" aria-label="Go to Leadership Signals"></a>
 </div>
 
 <button class="floating-next" aria-label="Next section" data-cursor="circle">
@@ -1502,9 +1528,9 @@ function initAnimations(){
     gsap.fromTo(el,{y:20},{y:-20,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
   });
 
-  const sections=['hero','about','services','impact','work','education','skills','publications','projects','cases','repositories','simulations','books','chapters','news','media','conferences','awards','writing','references','thesis','contact'];
-  const sectionAudioMap={hero:'hero',about:'about',services:'about',impact:'work',work:'work',education:'work',skills:'work',publications:'writing',projects:'writing',cases:'work',repositories:'writing',simulations:'writing',books:'writing',chapters:'writing',news:'writing',media:'writing',conferences:'writing',awards:'work',writing:'writing',references:'writing',thesis:'writing',contact:'contact'};
-  const sectionStarMap={hero:.16,about:.25,services:.32,impact:.42,work:.48,education:.53,skills:.58,publications:.63,projects:.68,cases:.64,repositories:.7,simulations:.74,books:.76,chapters:.78,news:.8,media:.82,conferences:.84,awards:.86,writing:.9,references:.78,thesis:.9,contact:1};
+  const sections=['hero','about','services','impact','work','education','skills','publications','projects','cases','repositories','simulations','books','chapters','news','media','conferences','awards','writing','references','thesis','career-atlas','contact','leadership-signals'];
+  const sectionAudioMap={hero:'hero',about:'about',services:'about',impact:'work',work:'work',education:'work',skills:'work',publications:'writing',projects:'writing',cases:'work',repositories:'writing',simulations:'writing',books:'writing',chapters:'writing',news:'writing',media:'writing',conferences:'writing',awards:'work',writing:'writing',references:'writing',thesis:'writing','career-atlas':'work',contact:'contact','leadership-signals':'contact'};
+  const sectionStarMap={hero:.16,about:.25,services:.32,impact:.42,work:.48,education:.53,skills:.58,publications:.63,projects:.68,cases:.64,repositories:.7,simulations:.74,books:.76,chapters:.78,news:.8,media:.82,conferences:.84,awards:.86,writing:.9,references:.78,thesis:.9,'career-atlas':.94,contact:1,'leadership-signals':.97};
   const targetWeights={hero:1,about:0,work:0,writing:0,contact:0};
   let activeId='hero';
   function computeActive(){
@@ -1753,6 +1779,50 @@ atlasFilters.forEach(filter=>{
     if(selected && view!=='all' && selected.dataset.atlasType!==view) selectAtlasStop(visibleAtlasStops()[0]);
   });
 });
+
+// Leadership signals: a concise, evidence-backed companion to the full Career Atlas.
+const signalsShell=$('#signals-shell');
+if(signalsShell){
+  const signalTabs=Array.from(signalsShell.querySelectorAll('[data-signal]'));
+  const signalDetail=signalsShell.querySelector('#signal-detail');
+  const signalFields={
+    image:signalDetail.querySelector('[data-signal-image]'),
+    kicker:signalDetail.querySelector('[data-signal-kicker]'),
+    title:signalDetail.querySelector('[data-signal-title]'),
+    description:signalDetail.querySelector('[data-signal-description]'),
+    metric:signalDetail.querySelector('[data-signal-metric]')
+  };
+  signalTabs.forEach((tab,index)=>{ tab.id='signal-tab-'+(index+1); });
+  const selectSignal=tab=>{
+    signalTabs.forEach(item=>item.setAttribute('aria-selected',item===tab?'true':'false'));
+    signalDetail.setAttribute('aria-labelledby',tab.id);
+    signalFields.image.src=tab.dataset.image;
+    signalFields.image.alt=tab.dataset.alt;
+    signalFields.kicker.textContent=tab.dataset.kicker;
+    signalFields.title.textContent=tab.dataset.title;
+    signalFields.description.textContent=tab.dataset.description;
+    signalFields.metric.textContent=tab.dataset.metric;
+    signalDetail.classList.remove('is-updating');
+    void signalDetail.offsetWidth;
+    signalDetail.classList.add('is-updating');
+  };
+  signalTabs.forEach((tab,index)=>{
+    tab.addEventListener('click',()=>selectSignal(tab));
+    tab.addEventListener('focus',()=>selectSignal(tab));
+    tab.addEventListener('keydown',event=>{
+      const step={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[event.key];
+      let target;
+      if(step) target=signalTabs[(index+step+signalTabs.length)%signalTabs.length];
+      if(event.key==='Home') target=signalTabs[0];
+      if(event.key==='End') target=signalTabs[signalTabs.length-1];
+      if(!target) return;
+      event.preventDefault();
+      target.focus();
+      selectSignal(target);
+    });
+  });
+  selectSignal(signalTabs[0]);
+}
 
 // Evidence explorer: filter the three selected engagements without hiding their context in a separate page.
 const impactFilters=$$('[data-impact-filter]'), impactCases=$$('[data-impact-domains]');
