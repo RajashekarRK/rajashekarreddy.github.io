@@ -993,7 +993,7 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
         <p class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
     </div>
-    <div class="contact-globe rev" id="contact-globe" role="img" aria-label="Interactive rotating globe. Drag to rotate."><canvas id="contact-globe-canvas"></canvas><div class="globe-fallback" aria-hidden="true"></div></div>
+    <div class="contact-globe rev" id="contact-globe" role="img" aria-label="Interactive rotating globe showing travel routes from South India to visited countries. Drag to rotate."><canvas id="contact-globe-canvas"></canvas><div class="globe-fallback" aria-hidden="true"></div></div>
   </div>
 </section>
 
@@ -1335,14 +1335,31 @@ function initContactGlobe(){
       const earthTexture=textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg',texture=>{texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=renderer.capabilities.getMaxAnisotropy();});
       const earth=new THREE.Mesh(new THREE.SphereGeometry(2.02,64,48),new THREE.MeshPhongMaterial({map:earthTexture,specular:0x365d88,shininess:7})); globe.add(earth);
       const atmosphere=new THREE.Mesh(new THREE.SphereGeometry(2.11,64,48),new THREE.MeshBasicMaterial({color:0x78c8ff,transparent:true,opacity:.11,side:THREE.BackSide,depthWrite:false})); globe.add(atmosphere);
-      globe.rotation.set(.18,-.72,0);
+      globe.rotation.set(.18,2.42,0);
+      const globePoint=(lat,lon,r=2.1)=>{const phi=(90-lat)*Math.PI/180,theta=(lon+180)*Math.PI/180;return new THREE.Vector3(-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta));};
+      const southIndia=globePoint(12.9716,77.5946);
+      const visitedCountries=[
+        ['United Kingdom',51.5072,-.1276],['Austria',48.2082,16.3738],['Belgium',50.8503,4.3517],['France',48.8566,2.3522],['Germany',52.52,13.405],['Netherlands',52.3676,4.9041],['Switzerland',46.948,7.4474],['Italy',41.9028,12.4964],['Spain',40.4168,-3.7038],['Maldives',4.1755,73.5093],['Sri Lanka',6.9271,79.8612],['Nepal',27.7172,85.324],['China',39.9042,116.4074],['Hong Kong',22.3193,114.1694],['Singapore',1.3521,103.8198],['United States',38.9072,-77.0369],['Saudi Arabia',24.7136,46.6753],['Philippines',14.5995,120.9842],['United Arab Emirates',25.2048,55.2708]
+      ];
+      const destinationPoints=visitedCountries.map(([,lat,lon])=>globePoint(lat,lon));
       const pointGeo=new THREE.BufferGeometry();
-      const globePoint=(lat,lon,r=2.1)=>{const phi=(90-lat)*Math.PI/180,theta=(lon+180)*Math.PI/180;return[-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta)];};
-      const points=[[40,-74],[51,0],[19,72],[12,77],[1,103],[25,55],[-33,151]].map(location=>globePoint(...location));
-      pointGeo.setAttribute('position',new THREE.Float32BufferAttribute(points.flat(),3));
-      globe.add(new THREE.Points(pointGeo,new THREE.PointsMaterial({color:0xbfe4ff,size:.075,sizeAttenuation:true,transparent:true,opacity:.95})));
-      const arcs=[[points[0],points[1]],[points[1],points[2]],[points[2],points[3]],[points[3],points[4]],[points[3],points[5]],[points[4],points[6]]];
-      arcs.forEach(([from,to])=>{const a=new THREE.Vector3(...from), b=new THREE.Vector3(...to), mid=a.clone().add(b).multiplyScalar(.5).normalize().multiplyScalar(2.5);const curve=new THREE.QuadraticBezierCurve3(a,mid,b);const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(28)),new THREE.LineBasicMaterial({color:0x86caff,transparent:true,opacity:.44}));globe.add(line);});
+      pointGeo.setAttribute('position',new THREE.Float32BufferAttribute(destinationPoints.flatMap(point=>point.toArray()),3));
+      globe.add(new THREE.Points(pointGeo,new THREE.PointsMaterial({color:0xbfe4ff,size:.07,sizeAttenuation:true,transparent:true,opacity:.96})));
+      const homeMarker=new THREE.Mesh(new THREE.SphereGeometry(.075,16,12),new THREE.MeshBasicMaterial({color:0xffd78a,transparent:true,opacity:1}));
+      homeMarker.position.copy(southIndia); globe.add(homeMarker);
+      const homeRing=new THREE.Mesh(new THREE.RingGeometry(.095,.12,24),new THREE.MeshBasicMaterial({color:0xffd78a,transparent:true,opacity:.72,side:THREE.DoubleSide}));
+      homeRing.position.copy(southIndia.clone().multiplyScalar(1.006)); homeRing.lookAt(southIndia.clone().multiplyScalar(2)); globe.add(homeRing);
+      const arrowGeometry=new THREE.ConeGeometry(.048,.14,8);
+      visitedCountries.forEach(([name],index)=>{
+        const start=southIndia.clone(), end=destinationPoints[index].clone();
+        const mid=start.clone().add(end).multiplyScalar(.5).normalize().multiplyScalar(2.56);
+        const curve=new THREE.QuadraticBezierCurve3(start,mid,end);
+        const curvePoints=curve.getPoints(36);
+        globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curvePoints),new THREE.LineBasicMaterial({color:0x86caff,transparent:true,opacity:.36})));
+        const direction=curvePoints[curvePoints.length-1].clone().sub(curvePoints[curvePoints.length-2]).normalize();
+        const arrow=new THREE.Mesh(arrowGeometry,new THREE.MeshBasicMaterial({color:0xbfe4ff,transparent:true,opacity:.95}));
+        arrow.name=`Route to ${name}`; arrow.position.copy(end).add(end.clone().normalize().multiplyScalar(.025)); arrow.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction); globe.add(arrow);
+      });
       let active=true, dragging=false, lastX=0, velocity=0;
       function resize(){const rect=canvas.getBoundingClientRect();if(!rect.width || !rect.height) return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();}
       resize(); new ResizeObserver(resize).observe(host); host.classList.add('is-ready');
