@@ -1114,21 +1114,25 @@ function initContactGlobe(){
     loadThree().then(()=>{
       const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
       renderer.setPixelRatio(Math.min(w.devicePixelRatio,1.5));
+      renderer.outputColorSpace=THREE.SRGBColorSpace;
       const scene=new THREE.Scene();
       const camera=new THREE.PerspectiveCamera(40,1,.1,100); camera.position.z=6.25;
       const globe=new THREE.Group(); scene.add(globe);
-      const core=new THREE.Mesh(new THREE.SphereGeometry(2.02,36,24),new THREE.MeshBasicMaterial({color:0x07131c,transparent:true,opacity:.78,depthWrite:false})); globe.add(core);
-      const wire=new THREE.Mesh(new THREE.SphereGeometry(2.08,36,24),new THREE.MeshBasicMaterial({color:0x9fc5ff,wireframe:true,transparent:true,opacity:.34})); globe.add(wire);
-      const outerWire=new THREE.Mesh(new THREE.SphereGeometry(2.16,24,16),new THREE.MeshBasicMaterial({color:0x34bffd,wireframe:true,transparent:true,opacity:.11,depthWrite:false})); globe.add(outerWire);
-      const equator=new THREE.Mesh(new THREE.TorusGeometry(2.1,.012,6,72),new THREE.MeshBasicMaterial({color:0x34bffd,transparent:true,opacity:.64})); equator.rotation.x=Math.PI/2; globe.add(equator);
-      const meridian=new THREE.Mesh(new THREE.TorusGeometry(2.1,.012,6,72),new THREE.MeshBasicMaterial({color:0x6f9be6,transparent:true,opacity:.34})); meridian.rotation.y=Math.PI/2; globe.add(meridian);
-      const orbit=new THREE.Mesh(new THREE.TorusGeometry(2.48,.009,6,80),new THREE.MeshBasicMaterial({color:0x5e86dc,transparent:true,opacity:.35})); orbit.rotation.set(.82,.28,.3); globe.add(orbit);
+      scene.add(new THREE.AmbientLight(0xb9d8ff,.72));
+      const keyLight=new THREE.DirectionalLight(0xffffff,1.55); keyLight.position.set(5,3,6); scene.add(keyLight);
+      const rimLight=new THREE.DirectionalLight(0x34bffd,.8); rimLight.position.set(-5,-1,-4); scene.add(rimLight);
+      const textureLoader=new THREE.TextureLoader();
+      const earthTexture=textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg',texture=>{texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=renderer.capabilities.getMaxAnisotropy();});
+      const earth=new THREE.Mesh(new THREE.SphereGeometry(2.02,64,48),new THREE.MeshPhongMaterial({map:earthTexture,specular:0x365d88,shininess:7})); globe.add(earth);
+      const atmosphere=new THREE.Mesh(new THREE.SphereGeometry(2.11,64,48),new THREE.MeshBasicMaterial({color:0x78c8ff,transparent:true,opacity:.11,side:THREE.BackSide,depthWrite:false})); globe.add(atmosphere);
+      globe.rotation.set(.18,-.72,0);
       const pointGeo=new THREE.BufferGeometry();
-      const points=[[-1.2,.8,1.45],[1.3,.65,1.32],[-1.45,-.65,1.15],[1.05,-1.1,1.25],[0,.1,2.05],[.25,1.45,1.45],[-.65,-1.55,1.2]];
+      const globePoint=(lat,lon,r=2.1)=>{const phi=(90-lat)*Math.PI/180,theta=(lon+180)*Math.PI/180;return[-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta)];};
+      const points=[[40,-74],[51,0],[19,72],[12,77],[1,103],[25,55],[-33,151]].map(location=>globePoint(...location));
       pointGeo.setAttribute('position',new THREE.Float32BufferAttribute(points.flat(),3));
-      globe.add(new THREE.Points(pointGeo,new THREE.PointsMaterial({color:0x34bffd,size:.1,sizeAttenuation:true,transparent:true,opacity:.9})));
-      const arcs=[[points[0],points[4]],[points[4],points[1]],[points[4],points[2]],[points[4],points[3]],[points[5],points[4]]];
-      arcs.forEach(([from,to])=>{const a=new THREE.Vector3(...from), b=new THREE.Vector3(...to), mid=a.clone().add(b).multiplyScalar(.5).normalize().multiplyScalar(2.65);const curve=new THREE.QuadraticBezierCurve3(a,mid,b);const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(22)),new THREE.LineBasicMaterial({color:0x9fc5ff,transparent:true,opacity:.28}));globe.add(line);});
+      globe.add(new THREE.Points(pointGeo,new THREE.PointsMaterial({color:0xbfe4ff,size:.075,sizeAttenuation:true,transparent:true,opacity:.95})));
+      const arcs=[[points[0],points[1]],[points[1],points[2]],[points[2],points[3]],[points[3],points[4]],[points[3],points[5]],[points[4],points[6]]];
+      arcs.forEach(([from,to])=>{const a=new THREE.Vector3(...from), b=new THREE.Vector3(...to), mid=a.clone().add(b).multiplyScalar(.5).normalize().multiplyScalar(2.5);const curve=new THREE.QuadraticBezierCurve3(a,mid,b);const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(28)),new THREE.LineBasicMaterial({color:0x86caff,transparent:true,opacity:.44}));globe.add(line);});
       let active=true, dragging=false, lastX=0, velocity=0;
       function resize(){const rect=canvas.getBoundingClientRect();if(!rect.width || !rect.height) return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();}
       resize(); new ResizeObserver(resize).observe(host); host.classList.add('is-ready');
@@ -1163,6 +1167,7 @@ function initAnimations(){
         .add(()=>{ const h=$('.hero h1'); h.classList.add('in'); if(!prefersReduced) h.querySelectorAll('.w span').forEach((s,i)=>{ setTimeout(()=>scramble(s,s.textContent,700),300+i*180); }); }, '-=.6')
         .to('.hero .t-lg',{opacity:1,y:0,duration:.9}, '-=.3')
         .to('.hero .btn-primary',{opacity:1,y:0,duration:.7}, '-=.5')
+        .to('.hero .btn-outline',{opacity:1,y:0,duration:.7}, '-=.62')
         .to('.hero-socials',{opacity:1,y:0,duration:.65}, '-=.5')
         .to('.hero-system',{opacity:1,scale:1,duration:.9}, '-=.7')
         .to('.hero .scr',{opacity:1,duration:.6}, '-=.3');
