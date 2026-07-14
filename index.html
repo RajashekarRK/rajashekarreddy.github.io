@@ -165,10 +165,11 @@ main{position:relative;z-index:10}
 .mono{font-family:'JetBrains Mono',monospace}
 .eyebrow{font:.75rem/1 'JetBrains Mono',monospace;color:var(--cream-400);letter-spacing:.16em;text-transform:uppercase;margin-bottom:var(--space-md);display:flex;align-items:center;gap:12px}
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--cream-400)}
-h1{font-size:clamp(2.8rem,8vw,6.2rem);font-weight:900;letter-spacing:-.04em;line-height:.98;margin-bottom:var(--space-md)}
+h1{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:clamp(2.8rem,5.3vw,4.8rem);font-weight:800;letter-spacing:0;line-height:1.02;margin-bottom:var(--space-md)}
 h1 .c{background:linear-gradient(135deg,var(--cream-400) 0%,var(--cream-500) 50%,var(--cream-600) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .t-lg{font-size:clamp(1.05rem,2vw,1.35rem);font-weight:300;color:var(--text-2);max-width:620px;line-height:1.55;margin-bottom:var(--space-xl)}
-h2{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:var(--space-xl)}
+h2,h3{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}
+h2{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;line-height:1.05;margin-bottom:var(--space-xl)}
 h2 .c{color:var(--cream-400)}
 h3{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;line-height:1.25}
 .p-body{font-size:1.05rem;color:var(--text-2);line-height:1.75;max-width:720px}
@@ -198,22 +199,22 @@ h3{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;line-height:1.25}
 .card .tags-row{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
 .card .tag-sm{padding:4px 10px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.03em;background:rgba(159,197,255,.1);color:var(--cream-400)}
 
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-xl);align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(430px,.72fr);gap:var(--space-xl);align-items:center}.hero-grid>div:first-child{min-width:0}
 .hero-name-trigger{cursor:pointer;transition:color .25s}.hero-name-trigger:hover{color:var(--cream-400)}.hero-name-trigger:focus-visible{outline:2px solid var(--cyan);outline-offset:8px;border-radius:var(--radius-sm)}
-.hero-system{justify-self:end;width:min(100%,440px);padding:20px;border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-lg);background:rgba(10,24,41,.58);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.system-stage{position:relative;height:326px;isolation:isolate}
+.hero-system{justify-self:end;width:min(100%,540px);padding:22px;border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-lg);background:rgba(10,24,41,.58);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.system-stage{position:relative;height:430px;isolation:isolate}
 .system-stage::before,.system-stage::after{content:'';position:absolute;inset:12%;border:1px solid rgba(159,197,255,.1);border-radius:50%;pointer-events:none}
 .system-stage::after{inset:25%;border-color:rgba(52,191,253,.18)}
-.system-core{position:absolute;top:50%;left:50%;z-index:2;width:148px;height:148px;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;border:2px solid rgba(159,197,255,.38);box-shadow:0 0 0 14px rgba(159,197,255,.035),0 24px 56px rgba(0,0,0,.5);transition:border-color .25s,box-shadow .25s,transform .25s}.system-core:hover,.system-core:focus-visible{border-color:var(--cyan);box-shadow:0 0 0 17px rgba(52,191,253,.1),0 24px 56px rgba(0,0,0,.5);outline:none}.system-core:hover{transform:translate(-50%,-50%) scale(1.04)}
+.system-core{position:absolute;top:50%;left:50%;z-index:2;width:200px;height:200px;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;border:2px solid rgba(159,197,255,.38);box-shadow:0 0 0 14px rgba(159,197,255,.035),0 24px 56px rgba(0,0,0,.5);transition:border-color .25s,box-shadow .25s,transform .25s}.system-core:hover,.system-core:focus-visible{border-color:var(--cyan);box-shadow:0 0 0 17px rgba(52,191,253,.1),0 24px 56px rgba(0,0,0,.5);outline:none}.system-core:hover{transform:translate(-50%,-50%) scale(1.04)}
 .system-core img{width:100%;height:100%;object-fit:cover;filter:grayscale(12%)}
-.system-link{position:absolute;top:50%;left:50%;z-index:0;width:1px;height:112px;transform-origin:top;background:linear-gradient(var(--cream-400),transparent);opacity:.5;pointer-events:none}
-.system-link.l1{transform:rotate(-56deg)}.system-link.l2{transform:rotate(36deg)}.system-link.l3{transform:rotate(126deg)}.system-link.l4{transform:rotate(214deg)}
-.system-node{position:absolute;z-index:3;min-width:112px;padding:9px 10px;border:1px solid rgba(159,197,255,.16);border-radius:var(--radius-sm);background:rgba(6,17,31,.88);color:var(--text-2);font:.75rem/1.25 'JetBrains Mono',monospace;letter-spacing:.04em;text-align:left;text-transform:uppercase;transition:color .25s,border-color .25s,background .25s,transform .25s;cursor:pointer}
+.system-link{position:absolute;top:50%;left:50%;z-index:0;width:1px;height:130px;transform-origin:top;background:linear-gradient(var(--cream-400),transparent);opacity:.5;pointer-events:none}
+.system-link.l1{transform:rotate(180deg)}.system-link.l2{transform:rotate(-90deg)}.system-link.l3{transform:rotate(0)}.system-link.l4{transform:rotate(90deg)}
+.system-node{position:absolute;z-index:3;width:150px;padding:10px 12px;border:1px solid rgba(159,197,255,.16);border-radius:var(--radius-sm);background:rgba(6,17,31,.88);color:var(--text-2);font:.75rem/1.25 'JetBrains Mono',monospace;letter-spacing:.04em;text-align:center;text-transform:uppercase;transition:color .25s,border-color .25s,background .25s,transform .25s;cursor:pointer}
 .system-node:hover,.system-node.active{color:var(--cream-400);border-color:var(--cream-400);background:rgba(159,197,255,.11);transform:translateY(-2px)}
-.system-node.n1{top:18px;left:6px}.system-node.n2{top:18px;right:6px}.system-node.n3{bottom:18px;right:6px}.system-node.n4{bottom:18px;left:6px}
+.system-node.n1{top:8px;left:50%;margin-left:-75px}.system-node.n2{top:50%;right:6px;width:104px;margin-top:-25px}.system-node.n3{bottom:8px;left:50%;margin-left:-75px}.system-node.n4{top:50%;left:6px;width:104px;margin-top:-25px}
 .system-caption{padding:16px 4px 2px;border-top:1px solid rgba(159,197,255,.1);color:var(--text-3);font-size:.85rem;line-height:1.55}.system-caption strong{display:block;margin-bottom:3px;color:var(--cream-400);font-size:.95rem}.system-caption span{display:block}
-@media (max-width:900px){.hero-system{justify-self:start;margin-top:var(--space-lg)}}
-@media (max-width:430px){.system-stage{height:286px}.system-node{min-width:96px;font-size:.75rem}.system-node.n1,.system-node.n2{top:10px}.system-node.n3,.system-node.n4{bottom:10px}.system-core{width:118px;height:118px}}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-system{justify-self:start;margin-top:var(--space-lg)}}
+@media (max-width:560px){.hero-system{width:100%;padding:14px}.system-stage{height:360px}.system-core{width:156px;height:156px}.system-link{height:96px}.system-node{padding:8px 4px;font-size:.75rem}.system-node.n1,.system-node.n3{width:130px;margin-left:-65px}.system-node.n1{top:4px}.system-node.n3{bottom:4px}.system-node.n2,.system-node.n4{width:82px;margin-top:-24px}.system-node.n2{right:2px}.system-node.n4{left:2px}}
 .social-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(159,197,255,.15);color:var(--text-3);transition:border-color .25s,color .25s,transform .25s,background .25s}
 .social-btn svg{width:18px;height:18px;fill:currentColor}
 .social-btn:hover{border-color:var(--cream-400);color:var(--cream-400);background:rgba(159,197,255,.08);transform:translateY(-3px)}
@@ -321,6 +322,19 @@ h3{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;line-height:1.25}
 .tst-dot{width:8px;height:8px;border-radius:50%;background:var(--text-4);transition:background .25s,transform .25s}
 .tst-dot.on{background:var(--cream-400);transform:scale(1.3)}
 @media (max-width:768px){.tst-nav{display:none}}
+
+.career-atlas-intro{max-width:720px;margin:-22px 0 var(--space-lg);color:var(--text-2);font-size:1.04rem;line-height:1.7}
+.atlas-toolbar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-lg)}
+.atlas-filters{display:flex;flex-wrap:wrap;gap:8px}.atlas-filter{padding:9px 14px;border:1px solid rgba(159,197,255,.14);border-radius:var(--radius-full);color:var(--text-3);font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:color .25s,border-color .25s,background .25s;cursor:pointer}.atlas-filter:hover,.atlas-filter[aria-pressed="true"]{border-color:var(--cream-400);background:rgba(159,197,255,.12);color:var(--cream-400)}
+.atlas-instruction{color:var(--text-3);font:.75rem/1.4 'JetBrains Mono',monospace;letter-spacing:.04em;text-align:right}
+.atlas-viewport{overflow-x:auto;padding:8px 0 18px;scrollbar-width:thin;scrollbar-color:rgba(159,197,255,.34) transparent}.atlas-stage{position:relative;min-width:1100px;height:472px;border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-lg);background:linear-gradient(145deg,rgba(10,24,41,.82),rgba(10,24,41,.5));overflow:hidden}.atlas-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(52,191,253,.1),transparent 32%);pointer-events:none}.atlas-axis{position:absolute;top:50%;right:56px;left:56px;height:1px;background:linear-gradient(90deg,transparent,rgba(159,197,255,.55) 10%,rgba(159,197,255,.55) 90%,transparent)}.atlas-axis::before,.atlas-axis::after{content:'';position:absolute;top:50%;width:8px;height:8px;border:1px solid var(--cream-400);border-radius:50%;background:var(--ink);transform:translateY(-50%)}.atlas-axis::before{left:9%}.atlas-axis::after{right:9%}
+.atlas-lane{position:absolute;inset:0;transition:opacity .3s,transform .3s}.atlas-lane-label{position:absolute;left:24px;padding:6px 10px;border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-full);background:rgba(6,17,31,.74);color:var(--text-3);font:.75rem/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.atlas-lane.education .atlas-lane-label{top:22px}.atlas-lane.work .atlas-lane-label{bottom:22px}
+.atlas-stop{position:absolute;left:var(--position);z-index:2;width:142px;color:var(--text-2);text-align:center;transition:transform .25s var(--ease-smooth),opacity .25s;cursor:pointer}.atlas-stop.education{bottom:50%;padding-bottom:24px;transform:translateX(-50%)}.atlas-stop.work{top:50%;padding-top:24px;transform:translateX(-50%)}.atlas-stop:hover,.atlas-stop[aria-pressed="true"]{color:var(--cream-400)}.atlas-stop:hover.education,.atlas-stop.education[aria-pressed="true"]{transform:translateX(-50%) translateY(-5px)}.atlas-stop:hover.work,.atlas-stop.work[aria-pressed="true"]{transform:translateX(-50%) translateY(5px)}.atlas-stop-point{position:absolute;left:50%;width:12px;height:12px;border:2px solid var(--cream-400);border-radius:50%;background:var(--ink);box-shadow:0 0 0 6px rgba(159,197,255,.04);transform:translateX(-50%);transition:background .25s,box-shadow .25s}.atlas-stop.education .atlas-stop-point{bottom:-6px}.atlas-stop.work .atlas-stop-point{top:-6px}.atlas-stop[aria-pressed="true"] .atlas-stop-point{background:var(--cream-400);box-shadow:0 0 0 7px rgba(159,197,255,.12),0 0 22px rgba(52,191,253,.7)}
+.atlas-stop-logo{width:52px;height:52px;margin:0 auto 8px;display:grid;place-items:center;border:1px solid rgba(159,197,255,.16);border-radius:var(--radius-sm);background:rgba(237,245,255,.94);overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.22)}.atlas-stop-logo img{width:100%;height:100%;object-fit:contain;padding:7px}.atlas-stop-logo.no-logo{background:rgba(159,197,255,.13);color:var(--cream-400);font-size:1rem;font-weight:800}.atlas-stop-date{display:block;margin-bottom:3px;color:var(--cream-400);font:.75rem/1 'JetBrains Mono',monospace;letter-spacing:.04em}.atlas-stop-label{display:block;font-size:.78rem;font-weight:700;line-height:1.28}.atlas-stop[aria-pressed="true"] .atlas-stop-logo{border-color:var(--cream-400);box-shadow:0 0 0 3px rgba(159,197,255,.1),0 8px 20px rgba(0,0,0,.28)}
+.atlas-stage[data-view="education"] .atlas-lane.work,.atlas-stage[data-view="education"] .atlas-lane-label.work,.atlas-stage[data-view="work"] .atlas-lane.education,.atlas-stage[data-view="work"] .atlas-lane-label.education{opacity:.12;pointer-events:none}.atlas-stage[data-view="education"] .atlas-lane.work{transform:translateY(28px)}.atlas-stage[data-view="work"] .atlas-lane.education{transform:translateY(-28px)}
+.atlas-detail{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--space-md);align-items:start;margin-top:var(--space-lg);padding:var(--space-lg);border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-lg);background:rgba(10,24,41,.72)}.atlas-detail-logo{width:68px;height:68px;display:grid;place-items:center;border-radius:var(--radius-md);background:var(--cream-100);overflow:hidden}.atlas-detail-logo img{width:100%;height:100%;object-fit:contain;padding:9px}.atlas-detail-logo.no-logo{background:rgba(159,197,255,.14);color:var(--cream-400);font-weight:800}.atlas-detail-kicker{margin-bottom:5px;color:var(--cream-400);font:.75rem/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.atlas-detail h3{margin-bottom:6px}.atlas-detail p{max-width:780px;color:var(--text-2);font-size:.95rem;line-height:1.65}
+@media (prefers-reduced-motion:no-preference){.atlas-stop[aria-pressed="true"] .atlas-stop-point{animation:atlas-pulse 2.4s ease-in-out infinite}}@keyframes atlas-pulse{0%,100%{box-shadow:0 0 0 7px rgba(159,197,255,.12),0 0 16px rgba(52,191,253,.45)}50%{box-shadow:0 0 0 11px rgba(159,197,255,.03),0 0 28px rgba(52,191,253,.78)}}
+@media (max-width:760px){.atlas-toolbar{align-items:flex-start;flex-direction:column}.atlas-instruction{text-align:left}.atlas-viewport{overflow:visible;padding:0}.atlas-stage{min-width:0;height:auto;display:grid;gap:var(--space-lg);padding:var(--space-lg);overflow:visible}.atlas-axis{display:none}.atlas-lane{position:relative;display:grid;gap:10px}.atlas-lane.education .atlas-lane-label,.atlas-lane.work .atlas-lane-label{position:static;justify-self:start;order:-1}.atlas-stop,.atlas-stop.education,.atlas-stop.work{position:relative;top:auto;right:auto;bottom:auto;left:auto;width:100%;padding:12px;display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:12px;border:1px solid rgba(159,197,255,.1);border-radius:var(--radius-sm);background:rgba(6,17,31,.55);text-align:left;transform:none}.atlas-stop:hover,.atlas-stop[aria-pressed="true"],.atlas-stop:hover.education,.atlas-stop.education[aria-pressed="true"],.atlas-stop:hover.work,.atlas-stop.work[aria-pressed="true"]{transform:translateY(-2px)}.atlas-stop-logo{width:48px;height:48px;margin:0;grid-row:1 / span 2}.atlas-stop-date{grid-column:2;margin:0}.atlas-stop-label{grid-column:2}.atlas-stop-point{display:none}.atlas-stage[data-view="education"] .atlas-lane.work,.atlas-stage[data-view="education"] .atlas-lane-label.work,.atlas-stage[data-view="work"] .atlas-lane.education,.atlas-stage[data-view="work"] .atlas-lane-label.education{display:none}.atlas-detail{grid-template-columns:1fr}.atlas-detail-logo{width:58px;height:58px}}
 
 .contact-heading{margin-bottom:var(--space-xl)}
 .contact-heading .eyebrow{margin-bottom:var(--space-md)}.contact-heading h2{margin-bottom:0}
@@ -527,7 +541,8 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
     <a href="#writing" data-cursor="arrow"><span class="mn">17</span>Writing</a>
     <a href="#references" data-cursor="arrow"><span class="mn">18</span>References</a>
     <a href="#thesis" data-cursor="arrow"><span class="mn">19</span>Thesis</a>
-    <a href="#contact" data-cursor="arrow"><span class="mn">20</span>Contact</a>
+    <a href="#career-atlas" data-cursor="arrow"><span class="mn">20</span>Career Atlas</a>
+    <a href="#contact" data-cursor="arrow"><span class="mn">21</span>Contact</a>
   </div>
 </div>
 
@@ -551,10 +566,10 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
       <div class="system-stage">
         <span class="system-link l1" aria-hidden="true"></span><span class="system-link l2" aria-hidden="true"></span><span class="system-link l3" aria-hidden="true"></span><span class="system-link l4" aria-hidden="true"></span>
         <button type="button" class="system-core" data-modal-id="cv" data-cursor="circle" aria-label="Open curriculum vitae"><img src="assets/profile.jpg" alt="Dr. Rajashekarreddy Konduru"></button>
-        <button type="button" class="system-node n1 active" data-system-focus="strategy" aria-pressed="true">Strategy &amp; portfolio</button>
-        <button type="button" class="system-node n2" data-system-focus="growth" aria-pressed="false">Commercial growth</button>
-        <button type="button" class="system-node n3" data-system-focus="operations" aria-pressed="false">Operating systems</button>
-        <button type="button" class="system-node n4" data-system-focus="leadership" aria-pressed="false">Leadership capability</button>
+        <button type="button" class="system-node n1 active" data-system-focus="strategy" aria-pressed="true">Strategy</button>
+        <button type="button" class="system-node n2" data-system-focus="growth" aria-pressed="false">Growth</button>
+        <button type="button" class="system-node n3" data-system-focus="operations" aria-pressed="false">Operations</button>
+        <button type="button" class="system-node n4" data-system-focus="leadership" aria-pressed="false">Leadership</button>
       </div>
       <p class="system-caption" id="system-caption"><strong>Strategy &amp; portfolio</strong><span>Translate institutional ambition into a commercially coherent executive-learning portfolio.</span></p>
     </div>
@@ -911,8 +926,49 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
   <template id="tpl-thesis"><div class="modal-logo"><div class="logo"><img src="assets/logos/eur.nl.png" alt="RSM" loading="lazy"><span class="logo-fb">R</span></div></div><div class="modal-sub">PhD Dissertation · 2020–2023</div><div class="modal-title">Transparency Dynamics in Executive Education Markets</div><div class="modal-body"><p style="color:var(--cream-500);font-size:.9rem;margin-bottom:14px">Rotterdam School of Management, Erasmus University</p><p>An institutional-theory perspective on why and how executive-education providers differ in their disclosure of outcome evidence — examining the tension between academic, market, and hybrid institutional logics across 278 flagship leadership programmes.</p><h3 style="margin:20px 0 10px;font-size:1rem;color:var(--text)">Research Interests</h3><ul><li>Leadership Development Effectiveness</li><li>Evidence-Based Management in HR</li><li>Transparency in Professional Education Markets</li><li>Industry-Academia Partnership Models</li><li>Pedagogical Innovation &amp; Digital Transformation</li></ul></div></template>
 </section>
 
+<section class="sec" id="career-atlas" aria-labelledby="career-atlas-title">
+  <div class="eyebrow rev">20 — Career Atlas</div>
+  <h2 id="career-atlas-title" class="word-rev"><span class="w"><span>Career in</span></span> <span class="w"><span class="c">Motion</span></span></h2>
+  <p class="career-atlas-intro rev">A connected view of the education and leadership experiences that shaped an executive-education career. Select any point to explore the story behind it.</p>
+  <div class="atlas-toolbar rev">
+    <div class="atlas-filters" aria-label="Filter career atlas">
+      <button type="button" class="atlas-filter" data-atlas-filter="all" aria-pressed="true">Full journey</button>
+      <button type="button" class="atlas-filter" data-atlas-filter="education" aria-pressed="false">Education</button>
+      <button type="button" class="atlas-filter" data-atlas-filter="work" aria-pressed="false">Leadership</button>
+    </div>
+    <p class="atlas-instruction">Select a point to explore<br>Use arrow keys to move between points</p>
+  </div>
+  <div class="atlas-viewport rev">
+    <div class="atlas-stage" data-view="all">
+      <div class="atlas-axis" aria-hidden="true"></div>
+      <div class="atlas-lane education" data-atlas-lane="education">
+        <div class="atlas-lane-label education">Education &amp; credentials</div>
+        <button type="button" class="atlas-stop education" style="--position:10%" data-atlas-stop data-atlas-type="education" data-atlas-kicker="Education · Bengaluru · 1999–2001" data-atlas-title="BSc in Electronics & Mathematics" data-atlas-description="Built the analytical foundation for a career that connects technology, learning, and organisational performance." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">1999–2001</span><span class="atlas-stop-logo"><img src="assets/logos/bangaloreuniversity.ac.in.svg" alt="Bangalore University" loading="lazy"></span><span class="atlas-stop-label">Bangalore University</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop education" style="--position:30%" data-atlas-stop data-atlas-type="education" data-atlas-kicker="Technical credential · 1999–2002" data-atlas-title="VB & Java Programming" data-atlas-description="Established an early working fluency with technology and systems through NIIT University programming credentials." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">1999–2002</span><span class="atlas-stop-logo"><img src="assets/logos/niit.com.png" alt="NIIT University" loading="lazy"></span><span class="atlas-stop-label">NIIT University</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop education" style="--position:50%" data-atlas-stop data-atlas-type="education" data-atlas-kicker="MBA · United Kingdom · 2007–2009" data-atlas-title="MBA, General Management" data-atlas-description="Completed a full-time MBA on scholarship at the University of Huddersfield, building the management base for later P&L leadership." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2007–2009</span><span class="atlas-stop-logo"><img src="assets/logos/hud.ac.uk.svg" alt="University of Huddersfield" loading="lazy"></span><span class="atlas-stop-label">Huddersfield</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop education" style="--position:70%" data-atlas-stop data-atlas-type="education" data-atlas-kicker="Executive education · ISB & Kellogg · 2018" data-atlas-title="Global Advanced Management Programme" data-atlas-description="Advanced management study with ISB and Kellogg School of Management, focused on executive decision-making and institutional growth." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2018</span><span class="atlas-stop-logo"><img src="assets/logos/isb.edu.svg" alt="ISB and Kellogg School of Management" loading="lazy"></span><span class="atlas-stop-label">ISB–Kellogg</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop education" style="--position:90%" data-atlas-stop data-atlas-type="education" data-atlas-kicker="PhD · Rotterdam School of Management · 2020–2023" data-atlas-title="PhD, Organisational Behavior" data-atlas-description="Doctoral research on transparency dynamics in executive-education markets, linking institutional theory with practical evidence disclosure." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2020–2023</span><span class="atlas-stop-logo"><img src="assets/logos/eur.nl.png" alt="Rotterdam School of Management" loading="lazy"></span><span class="atlas-stop-label">RSM Erasmus</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+      </div>
+      <div class="atlas-lane work" data-atlas-lane="work">
+        <div class="atlas-lane-label work">Leadership experience</div>
+        <button type="button" class="atlas-stop work" style="--position:7%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Founder & Managing Director · 1999–2002" data-atlas-title="DotIn Computer Services" data-atlas-description="Founded and ran an IT services business to first-year profitability while quadrupling the client base and delivering a Karnataka digitisation project." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">1999–2002</span><span class="atlas-stop-logo no-logo" aria-hidden="true">DC</span><span class="atlas-stop-label">DotIn Computers</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:22%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Training & Development Manager · Dell · 2002–2007" data-atlas-title="Training & Development Manager" data-atlas-description="Led learning operations for multi-location teams and reduced new-hire ramp time through a redesigned curriculum." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2002–2007</span><span class="atlas-stop-logo"><img src="assets/logos/dell.com.svg" alt="Dell" loading="lazy"></span><span class="atlas-stop-label">Dell</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:37%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Consultant · Bengaluru · 2009–2010" data-atlas-title="Bermudez Consulting" data-atlas-description="Advised Fortune 500 clients on process transformation and learning design in multicultural operating environments." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2009–2010</span><span class="atlas-stop-logo"><img src="assets/logos/bermudez.com.svg" alt="Bermudez Consulting" loading="lazy"></span><span class="atlas-stop-label">Bermudez</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:52%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Senior Manager, Learning & Development · TCS · 2010–2014" data-atlas-title="Senior Manager, Learning & Development" data-atlas-description="Managed learning and development for analytics and KPO associates, connecting capability roadmaps to client requirements and operational savings." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2010–2014</span><span class="atlas-stop-logo"><img src="assets/logos/tcs.com.svg" alt="Tata Consultancy Services" loading="lazy"></span><span class="atlas-stop-label">TCS</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:67%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Associate Director, Executive Education · ISB · 2014–2021" data-atlas-title="Associate Director, Executive Education" data-atlas-description="Held P&L accountability for custom executive education and drove revenue growth through account development and portfolio redesign." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2014–2021</span><span class="atlas-stop-logo"><img src="assets/logos/isb.edu.svg" alt="Indian School of Business" loading="lazy"></span><span class="atlas-stop-label">ISB</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:82%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Executive Director · AMA · 2021" data-atlas-title="Executive Director, Executive Education Operations" data-atlas-description="Provided COO-level leadership across learning solutions, marketing, sales, client engagement, and programme delivery." aria-pressed="false" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2021</span><span class="atlas-stop-logo"><img src="assets/logos/amaindia.org.png" alt="Ahmedabad Management Association" loading="lazy"></span><span class="atlas-stop-label">AMA</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+        <button type="button" class="atlas-stop work" style="--position:93%" data-atlas-stop data-atlas-type="work" data-atlas-kicker="Director, Executive Education · Great Lakes · 2021–present" data-atlas-title="Director, Executive Education" data-atlas-description="Owns the Executive Education Centre P&L, delivering 250 percent revenue growth through portfolio innovation, segmentation, and new corporate accounts." aria-pressed="true" aria-controls="atlas-detail" data-cursor="circle"><span class="atlas-stop-date">2021–present</span><span class="atlas-stop-logo"><img src="assets/logos/greatlakes.edu.png" alt="Great Lakes Institute of Management" loading="lazy"></span><span class="atlas-stop-label">Great Lakes</span><span class="atlas-stop-point" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="atlas-detail rev" id="atlas-detail" role="status" aria-live="polite" aria-atomic="true">
+    <div class="atlas-detail-logo"><img src="assets/logos/greatlakes.edu.png" alt="Great Lakes Institute of Management"></div>
+    <div><p class="atlas-detail-kicker">Director, Executive Education · Great Lakes · 2021–present</p><h3>Director, Executive Education</h3><p>Owns the Executive Education Centre P&amp;L, delivering 250 percent revenue growth through portfolio innovation, segmentation, and new corporate accounts.</p></div>
+  </div>
+</section>
+
 <section class="sec" id="contact" aria-labelledby="contact-title">
-  <div class="contact-heading"><div class="eyebrow rev">20 — Contact</div><h2 id="contact-title" class="word-rev"><span class="w"><span>Get in</span></span> <span class="w"><span class="c">Touch</span></span></h2></div>
+  <div class="contact-heading"><div class="eyebrow rev">21 — Contact</div><h2 id="contact-title" class="word-rev"><span class="w"><span>Get in</span></span> <span class="w"><span class="c">Touch</span></span></h2></div>
   <div class="contact-grid">
     <div class="contact-lead">
       <div class="contact-text rev">
@@ -968,7 +1024,7 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
 </main>
 
 <div class="sec-nav" aria-label="Section navigation">
-  <a href="#about" data-cursor="circle" data-label="About" aria-label="Go to About"></a><a href="#services" data-cursor="circle" data-label="Services" aria-label="Go to Services"></a><a href="#impact" data-cursor="circle" data-label="Impact" aria-label="Go to Selected Impact"></a><a href="#work" data-cursor="circle" data-label="Work" aria-label="Go to Work"></a><a href="#education" data-cursor="circle" data-label="Education" aria-label="Go to Education"></a><a href="#skills" data-cursor="circle" data-label="Skills" aria-label="Go to Skills"></a><a href="#publications" data-cursor="circle" data-label="Research" aria-label="Go to Research"></a><a href="#projects" data-cursor="circle" data-label="Projects" aria-label="Go to Projects"></a><a href="#cases" data-cursor="circle" data-label="Cases" aria-label="Go to Cases"></a><a href="#repositories" data-cursor="circle" data-label="Code" aria-label="Go to Code"></a><a href="#simulations" data-cursor="circle" data-label="Simulations" aria-label="Go to Simulations"></a><a href="#books" data-cursor="circle" data-label="Books" aria-label="Go to Books"></a><a href="#chapters" data-cursor="circle" data-label="Chapters" aria-label="Go to Chapters"></a><a href="#news" data-cursor="circle" data-label="News" aria-label="Go to News"></a><a href="#media" data-cursor="circle" data-label="Media" aria-label="Go to Media"></a><a href="#conferences" data-cursor="circle" data-label="Conferences" aria-label="Go to Conferences"></a><a href="#awards" data-cursor="circle" data-label="Awards" aria-label="Go to Awards"></a><a href="#writing" data-cursor="circle" data-label="Writing" aria-label="Go to Writing"></a><a href="#references" data-cursor="circle" data-label="References" aria-label="Go to References"></a><a href="#thesis" data-cursor="circle" data-label="Thesis" aria-label="Go to Thesis"></a><a href="#contact" data-cursor="circle" data-label="Contact" aria-label="Go to Contact"></a>
+  <a href="#about" data-cursor="circle" data-label="About" aria-label="Go to About"></a><a href="#services" data-cursor="circle" data-label="Services" aria-label="Go to Services"></a><a href="#impact" data-cursor="circle" data-label="Impact" aria-label="Go to Selected Impact"></a><a href="#work" data-cursor="circle" data-label="Work" aria-label="Go to Work"></a><a href="#education" data-cursor="circle" data-label="Education" aria-label="Go to Education"></a><a href="#skills" data-cursor="circle" data-label="Skills" aria-label="Go to Skills"></a><a href="#publications" data-cursor="circle" data-label="Research" aria-label="Go to Research"></a><a href="#projects" data-cursor="circle" data-label="Projects" aria-label="Go to Projects"></a><a href="#cases" data-cursor="circle" data-label="Cases" aria-label="Go to Cases"></a><a href="#repositories" data-cursor="circle" data-label="Code" aria-label="Go to Code"></a><a href="#simulations" data-cursor="circle" data-label="Simulations" aria-label="Go to Simulations"></a><a href="#books" data-cursor="circle" data-label="Books" aria-label="Go to Books"></a><a href="#chapters" data-cursor="circle" data-label="Chapters" aria-label="Go to Chapters"></a><a href="#news" data-cursor="circle" data-label="News" aria-label="Go to News"></a><a href="#media" data-cursor="circle" data-label="Media" aria-label="Go to Media"></a><a href="#conferences" data-cursor="circle" data-label="Conferences" aria-label="Go to Conferences"></a><a href="#awards" data-cursor="circle" data-label="Awards" aria-label="Go to Awards"></a><a href="#writing" data-cursor="circle" data-label="Writing" aria-label="Go to Writing"></a><a href="#references" data-cursor="circle" data-label="References" aria-label="Go to References"></a><a href="#thesis" data-cursor="circle" data-label="Thesis" aria-label="Go to Thesis"></a><a href="#career-atlas" data-cursor="circle" data-label="Career Atlas" aria-label="Go to Career Atlas"></a><a href="#contact" data-cursor="circle" data-label="Contact" aria-label="Go to Contact"></a>
 </div>
 
 <button class="floating-next" aria-label="Next section" data-cursor="circle">
@@ -1002,7 +1058,7 @@ function applyLogoFallback(image){
   if(!(image instanceof HTMLImageElement) || image.dataset.logoFallbackApplied) return;
   image.dataset.logoFallbackApplied='true';
   image.style.display='none';
-  const logo=image.closest('.logo');
+  const logo=image.closest('.logo,.atlas-stop-logo,.atlas-detail-logo');
   if(logo) logo.classList.add('no-logo');
 }
 d.addEventListener('error',event=>applyLogoFallback(event.target),true);
@@ -1507,6 +1563,52 @@ $$('[data-system-focus]').forEach(node=>{
     const message=systemMessages[node.dataset.systemFocus];
     $$('[data-system-focus]').forEach(item=>{item.classList.toggle('active',item===node);item.setAttribute('aria-pressed',item===node?'true':'false');});
     if(systemCaption && message) systemCaption.innerHTML='<strong>'+message[0]+'</strong><span>'+message[1]+'</span>';
+  });
+});
+
+// Career Atlas: a two-track timeline with a compact, keyboard-friendly detail view.
+const atlasStage=$('.atlas-stage'), atlasStops=$$('[data-atlas-stop]'), atlasFilters=$$('[data-atlas-filter]'), atlasDetail=$('#atlas-detail');
+function selectAtlasStop(stop){
+  if(!stop || !atlasDetail) return;
+  atlasStops.forEach(item=>item.setAttribute('aria-pressed',item===stop?'true':'false'));
+  const detailLogo=atlasDetail.querySelector('.atlas-detail-logo');
+  const sourceLogo=stop.querySelector('.atlas-stop-logo');
+  if(detailLogo && sourceLogo){
+    detailLogo.replaceChildren();
+    detailLogo.classList.toggle('no-logo',sourceLogo.classList.contains('no-logo'));
+    const image=sourceLogo.querySelector('img');
+    if(image) detailLogo.appendChild(image.cloneNode(true));
+    else detailLogo.textContent=sourceLogo.textContent;
+  }
+  const kicker=atlasDetail.querySelector('.atlas-detail-kicker'), title=atlasDetail.querySelector('h3'), description=atlasDetail.querySelector('p:last-child');
+  if(kicker) kicker.textContent=stop.dataset.atlasKicker||'';
+  if(title) title.textContent=stop.dataset.atlasTitle||'';
+  if(description) description.textContent=stop.dataset.atlasDescription||'';
+}
+function visibleAtlasStops(){
+  const view=atlasStage?.dataset.view||'all';
+  return atlasStops.filter(stop=>view==='all'||stop.dataset.atlasType===view);
+}
+atlasStops.forEach(stop=>{
+  stop.addEventListener('click',()=>selectAtlasStop(stop));
+  stop.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    const stops=visibleAtlasStops(), index=stops.indexOf(stop);
+    let next=stop;
+    if(event.key==='Home') next=stops[0];
+    else if(event.key==='End') next=stops[stops.length-1];
+    else { const direction=['ArrowLeft','ArrowUp'].includes(event.key)?-1:1; next=stops[(index+direction+stops.length)%stops.length]; }
+    selectAtlasStop(next); next.focus();
+  });
+});
+atlasFilters.forEach(filter=>{
+  filter.addEventListener('click',()=>{
+    const view=filter.dataset.atlasFilter||'all';
+    if(atlasStage) atlasStage.dataset.view=view;
+    atlasFilters.forEach(item=>item.setAttribute('aria-pressed',item===filter?'true':'false'));
+    const selected=atlasStops.find(stop=>stop.getAttribute('aria-pressed')==='true');
+    if(selected && view!=='all' && selected.dataset.atlasType!==view) selectAtlasStop(visibleAtlasStops()[0]);
   });
 });
 
