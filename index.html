@@ -86,6 +86,7 @@ img{max-width:100%;display:block}
 @media (max-width:768px),(hover:none){.cr{display:none}body,button,a{cursor:auto}}
 
 #bg{position:fixed;inset:0;z-index:0;width:100%;height:100%;opacity:.72;pointer-events:none}
+.site-bg-image{position:fixed;inset:0;z-index:0;pointer-events:none;background:center/cover no-repeat url('assets/images/cosmic-vishnu-background.png');opacity:.05}
 .vg{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 75% 60% at 50% 0%,rgba(159,197,255,.055) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 15% 100%,rgba(52,191,253,.04) 0%,transparent 55%),radial-gradient(circle at 85% 20%,rgba(94,134,220,.025) 0%,transparent 35%);mix-blend-mode:screen}
 .grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
 .bg-orb{display:none}
@@ -443,6 +444,7 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
 
 <div class="cr" aria-hidden="true"><div class="cr-d"></div><div class="cr-r"></div></div>
 <canvas id="bg"></canvas>
+<div class="site-bg-image" aria-hidden="true"></div>
 <div class="vg"></div>
 <div class="grain"></div>
 <div class="bg-orb a" aria-hidden="true"></div>
