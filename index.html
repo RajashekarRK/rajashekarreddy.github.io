@@ -281,6 +281,7 @@ h3{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:700;line-height:1.25}
 .tag{padding:8px 18px;border-radius:var(--radius-full);font-size:.8rem;font-weight:600;background:rgba(159,197,255,.08);color:var(--text-2);border:1px solid rgba(159,197,255,.08);transition:all .25s;transform-origin:center}
 .tag:hover,.tag.active{background:rgba(159,197,255,.18);border-color:rgba(159,197,255,.3);color:var(--cream-400);transform:translateY(-2px)}
 .tag.dim{opacity:.35;transform:scale(.96)}
+.competency-explorer{position:relative;overflow:hidden;margin:0 0 var(--space-lg);padding:clamp(20px,3vw,34px);border:1px solid rgba(159,197,255,.14);border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(13,31,52,.9),rgba(7,20,35,.74));box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 22px 50px rgba(0,0,0,.18)}.competency-explorer::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 90% 12%,rgba(52,191,253,.14),transparent 28%),linear-gradient(115deg,transparent 35%,rgba(159,197,255,.035) 35.3%,transparent 35.6%)}.competency-head,.competency-layout{position:relative;z-index:1}.competency-head{display:flex;align-items:end;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-lg)}.competency-kicker{display:block;margin-bottom:8px;color:var(--cream-400);font:.75rem/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase}.competency-head h3{font-size:clamp(1.35rem,2.2vw,1.8rem);margin:0}.competency-head p{max-width:440px;margin:0;color:var(--text-3);font-size:.88rem;line-height:1.55;text-align:right}.competency-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:clamp(20px,3vw,42px);align-items:stretch}.competency-list{display:flex;flex-direction:column;gap:5px}.competency-tab{display:grid;grid-template-columns:34px minmax(150px,1fr) minmax(96px,1.25fr) 58px;align-items:center;gap:12px;width:100%;padding:10px 12px;border:1px solid transparent;border-radius:var(--radius-sm);color:var(--text-3);text-align:left;transition:border-color .25s,background .25s,transform .25s}.competency-tab:hover,.competency-tab[aria-selected="true"]{border-color:rgba(159,197,255,.22);background:rgba(159,197,255,.07);color:var(--text);transform:translateX(3px)}.competency-index{color:var(--text-4);font:.7rem/1 'JetBrains Mono',monospace}.competency-name{font-size:.84rem;font-weight:700;line-height:1.25}.competency-track{height:8px;overflow:hidden;border-radius:999px;background:rgba(159,197,255,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.35)}.competency-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--competency-start),var(--competency-end));box-shadow:0 0 16px var(--competency-glow);transition:width 1s var(--ease-out-expo)}.competency-explorer.is-ready .competency-fill{width:calc(var(--level) * 1%)}.competency-years{color:var(--cream-400);font:.78rem/1 'JetBrains Mono',monospace;text-align:right;white-space:nowrap}.competency-tab:nth-child(1){--competency-start:#79b9ff;--competency-end:#30c2ff;--competency-glow:rgba(52,191,253,.55)}.competency-tab:nth-child(2){--competency-start:#4f8de2;--competency-end:#7cb7ff;--competency-glow:rgba(124,183,255,.45)}.competency-tab:nth-child(3){--competency-start:#49bfa4;--competency-end:#8de0c4;--competency-glow:rgba(91,207,174,.4)}.competency-tab:nth-child(4){--competency-start:#d6a853;--competency-end:#ffe082;--competency-glow:rgba(255,215,138,.38)}.competency-tab:nth-child(5){--competency-start:#4baed0;--competency-end:#7ee5e3;--competency-glow:rgba(126,229,227,.35)}.competency-tab:nth-child(6){--competency-start:#6d8ee8;--competency-end:#a2b6ff;--competency-glow:rgba(162,182,255,.36)}.competency-tab:nth-child(7){--competency-start:#679a75;--competency-end:#9dcf8b;--competency-glow:rgba(157,207,139,.32)}.competency-detail{display:flex;flex-direction:column;justify-content:space-between;min-height:310px;padding:clamp(18px,2.4vw,28px);border:1px solid rgba(159,197,255,.12);border-radius:var(--radius-md);background:rgba(5,17,30,.48)}.competency-orbit{width:86px;height:86px;display:grid;place-items:center;margin-bottom:var(--space-md);border:1px solid rgba(159,197,255,.2);border-radius:50%;background:radial-gradient(circle,rgba(52,191,253,.2),rgba(52,191,253,.03) 58%,transparent 60%);box-shadow:inset 0 0 20px rgba(52,191,253,.12),0 0 36px rgba(52,191,253,.08)}.competency-orbit strong{color:var(--cream-400);font:1.25rem/1 'JetBrains Mono',monospace}.competency-detail .detail-label{margin-bottom:8px;color:var(--cream-400);font:.72rem/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}.competency-detail h4{margin-bottom:10px;font-size:1.15rem}.competency-detail p{margin:0;color:var(--text-2);font-size:.9rem;line-height:1.62}.competency-proof{margin-top:var(--space-md);padding-top:var(--space-md);border-top:1px solid rgba(159,197,255,.1);color:var(--text-3);font-size:.8rem;line-height:1.55}.competency-proof strong{display:block;margin-bottom:4px;color:var(--text-2);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}@media (max-width:760px){.competency-head{display:block}.competency-head p{margin-top:10px;text-align:left}.competency-layout{grid-template-columns:1fr}.competency-detail{min-height:0}.competency-tab{grid-template-columns:28px minmax(116px,1fr) minmax(70px,.75fr) 48px;gap:8px;padding:9px 7px}.competency-name{font-size:.76rem}.competency-years{font-size:.7rem}.competency-track{height:6px}}@media (prefers-reduced-motion:reduce){.competency-fill{transition:none}.competency-tab{transition:none}}
 
 .sec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}
 @media (max-width:768px){.sec-grid{grid-template-columns:1fr}}
@@ -377,6 +378,7 @@ footer .c{color:var(--cream-400)}
 .sound-hint{position:fixed;bottom:24px;right:24px;z-index:90;padding:10px 16px;border-radius:var(--radius-full);background:rgba(10,24,41,.9);border:1px solid rgba(159,197,255,.15);font-size:.75rem;color:var(--text-3);display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s;pointer-events:none}
 .sound-hint.show{opacity:1;transform:translateY(0)}
 .sound-hint kbd{padding:2px 6px;border-radius:4px;background:rgba(159,197,255,.12);color:var(--cream-400);font-family:'JetBrains Mono',monospace}
+@media (max-width:760px){.sound-hint{display:none}}
 
 .empty-card{padding:var(--space-xl);text-align:center;border-radius:var(--radius-lg);background:rgba(10,24,41,.5);border:1px dashed rgba(159,197,255,.15);color:var(--text-3);font-size:.95rem;cursor:pointer;transition:border-color .3s,transform .3s,background .3s}
 .empty-card:hover{border-color:rgba(159,197,255,.3);transform:translateY(-3px);background:rgba(10,24,41,.7)}
@@ -664,6 +666,24 @@ footer{padding:var(--space-xxl) var(--space-md) var(--space-xl);max-width:var(--
     <button class="sf" data-filter="lead">Leadership</button>
     <button class="sf" data-filter="method">Methods & Tech</button>
     <button class="sf" data-filter="cert">Certifications</button>
+  </div>
+  <div class="competency-explorer rev" id="competency-explorer" aria-labelledby="competency-title">
+    <div class="competency-head"><div><span class="competency-kicker">Evidence-led leadership depth</span><h3 id="competency-title">Core Competencies</h3></div><p>Selected capability tracks, grounded in the operating roles, commercial results, and institutional work across the career.</p></div>
+    <div class="competency-layout">
+      <div class="competency-list" role="tablist" aria-label="Core competency tracks">
+        <button type="button" class="competency-tab" role="tab" aria-selected="true" aria-controls="competency-detail" data-competency data-title="Executive Education & Professional Upskilling" data-years="20+" data-domain="Portfolio, programme and institution design" data-summary="Builds executive, professional, and higher-education businesses from proposition and portfolio through delivery, renewal, and measurable client impact." data-proof="250% revenue growth at Great Lakes; scaled the ISB-Kellogg GAMP cohort from 35 to 60."><span class="competency-index">01</span><span class="competency-name">Executive Education &amp; Professional Upskilling</span><span class="competency-track"><span class="competency-fill" style="--level:100"></span></span><span class="competency-years">20+ yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="B2B Corporate Strategic Partnerships" data-years="16" data-domain="Enterprise growth and account development" data-summary="Shapes consultative enterprise partnerships, corporate academies, and long-term accounts across public-sector, manufacturing, BFSI, and technology clients." data-proof="32+ partnerships at 85% retention; 200+ CXO and CHRO relationship network."><span class="competency-index">02</span><span class="competency-name">B2B Corporate Strategic Partnerships</span><span class="competency-track"><span class="competency-fill" style="--level:80"></span></span><span class="competency-years">16 yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="Team Leadership & Talent Development" data-years="16" data-domain="High-accountability teams and coaching" data-summary="Leads cross-functional teams across sales, operations, programme management, faculty and client delivery, with a coaching-led performance culture." data-proof="Leads a 15-member executive-education organisation; previously managed L&D for 750+ TCS associates."><span class="competency-index">03</span><span class="competency-name">Team Leadership &amp; Talent Development</span><span class="competency-track"><span class="competency-fill" style="--level:80"></span></span><span class="competency-years">16 yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="P&amp;L Leadership & Revenue Growth" data-years="12+" data-domain="Commercial ownership and portfolio economics" data-summary="Owns the commercial system end to end: portfolio choices, value-based pricing, segmentation, budgeting, growth plans, and execution discipline." data-proof="250% revenue growth at Great Lakes and approximately 200% year-over-year custom executive-education growth at ISB."><span class="competency-index">04</span><span class="competency-name">P&amp;L Leadership &amp; Revenue Growth</span><span class="competency-track"><span class="competency-fill" style="--level:60"></span></span><span class="competency-years">12+ yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="Stakeholder Management" data-years="11+" data-domain="CXO, faculty, board and institutional alignment" data-summary="Aligns deans, chairmen, faculty leaders, accreditation bodies, and senior client stakeholders around practical institutional and commercial outcomes." data-proof="Worked across 200+ CXO/CHRO relationships, international academic MOUs, and accreditation evidence-building."><span class="competency-index">05</span><span class="competency-name">Stakeholder Management</span><span class="competency-track"><span class="competency-fill" style="--level:55"></span></span><span class="competency-years">11+ yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="Strategic Planning & GTM Execution" data-years="11+" data-domain="Growth systems and market-facing execution" data-summary="Turns institutional ambition into market segmentation, growth roadmaps, sales mechanisms, and replicable launch-to-renewal operating rhythms." data-proof="Built the BD and marketing engine at Great Lakes; increased B2B nominations by 300% at ISB."><span class="competency-index">06</span><span class="competency-name">Strategic Planning &amp; GTM Execution</span><span class="competency-track"><span class="competency-fill" style="--level:55"></span></span><span class="competency-years">11+ yrs</span></button>
+        <button type="button" class="competency-tab" role="tab" aria-selected="false" aria-controls="competency-detail" data-competency data-title="Digital, Data & Operations Transformation" data-years="7+" data-domain="CRM, analytics and scalable delivery operations" data-summary="Uses CRM, MarTech, LXP/LMS, RPA, low-code automation, and business analytics to improve acquisition, delivery quality, and operating leverage." data-proof="$7.5M transformation savings; approximately Rs 2 crore savings from training digitisation at TCS."><span class="competency-index">07</span><span class="competency-name">Digital, Data &amp; Operations Transformation</span><span class="competency-track"><span class="competency-fill" style="--level:35"></span></span><span class="competency-years">7+ yrs</span></button>
+      </div>
+      <div class="competency-detail" id="competency-detail" role="tabpanel" tabindex="0">
+        <div><div class="competency-orbit" aria-hidden="true"><strong data-competency-years>20+</strong></div><div class="detail-label" data-competency-domain>Portfolio, programme and institution design</div><h4 data-competency-title>Executive Education &amp; Professional Upskilling</h4><p data-competency-summary>Builds executive, professional, and higher-education businesses from proposition and portfolio through delivery, renewal, and measurable client impact.</p></div>
+        <div class="competency-proof"><strong>Evidence</strong><span data-competency-proof>250% revenue growth at Great Lakes; scaled the ISB-Kellogg GAMP cohort from 35 to 60.</span></div>
+      </div>
+    </div>
   </div>
   <div class="tags rev">
     <span class="tag" data-groups="exec lead">P&L Management</span><span class="tag" data-groups="exec">Executive Education</span><span class="tag" data-groups="exec">Business Development</span><span class="tag" data-groups="lead">Strategic Leadership</span><span class="tag" data-groups="exec">Revenue Growth</span><span class="tag" data-groups="exec">Go-to-Market Strategy</span><span class="tag" data-groups="exec">Corporate Partnerships</span><span class="tag" data-groups="exec">Higher Education Administration</span><span class="tag" data-groups="exec">Programme Design</span><span class="tag" data-groups="method">Digital Transformation</span><span class="tag" data-groups="method">CRM (Salesforce)</span><span class="tag" data-groups="method">Marketing Automation</span><span class="tag" data-groups="exec">Accreditation (AACSB / AMBA)</span><span class="tag" data-groups="lead">Faculty & Stakeholder Management</span><span class="tag" data-groups="lead">Team Leadership</span><span class="tag" data-groups="lead">Executive Coaching (ICF)</span><span class="tag" data-groups="cert">Lean Six Sigma</span><span class="tag" data-groups="exec">EdTech</span><span class="tag" data-groups="exec">Learning Experience Platforms (LXP)</span><span class="tag" data-groups="method">Research & Thought Leadership</span><span class="tag" data-groups="method">Process Automation & RPA</span><span class="tag" data-groups="method">eLearning Authoring</span><span class="tag" data-groups="cert">Psychometric Tools</span><span class="tag" data-groups="cert">Project Management (PRINCE2/Agile/Scrum)</span>
@@ -1597,6 +1617,55 @@ filters.forEach(f=>{
     });
   });
 });
+
+// Competency explorer: accessible tabs expose the evidence behind each capability track.
+const competencyExplorer=$('#competency-explorer');
+if(competencyExplorer){
+  const competencyTabs=$$('[data-competency]');
+  const competencyDetail=competencyExplorer.querySelector('#competency-detail');
+  const competencyFields={
+    years:competencyDetail.querySelector('[data-competency-years]'),
+    domain:competencyDetail.querySelector('[data-competency-domain]'),
+    title:competencyDetail.querySelector('[data-competency-title]'),
+    summary:competencyDetail.querySelector('[data-competency-summary]'),
+    proof:competencyDetail.querySelector('[data-competency-proof]')
+  };
+  competencyTabs.forEach((tab,index)=>{
+    tab.id='competency-tab-'+(index+1);
+  });
+  const selectCompetency=tab=>{
+    competencyTabs.forEach(item=>item.setAttribute('aria-selected',item===tab?'true':'false'));
+    competencyDetail.setAttribute('aria-labelledby',tab.id);
+    competencyFields.years.textContent=tab.dataset.years;
+    competencyFields.domain.textContent=tab.dataset.domain;
+    competencyFields.title.textContent=tab.dataset.title;
+    competencyFields.summary.textContent=tab.dataset.summary;
+    competencyFields.proof.textContent=tab.dataset.proof;
+  };
+  competencyTabs.forEach((tab,index)=>{
+    tab.addEventListener('click',()=>selectCompetency(tab));
+    tab.addEventListener('keydown',event=>{
+      const step={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[event.key];
+      let target;
+      if(step) target=competencyTabs[(index+step+competencyTabs.length)%competencyTabs.length];
+      if(event.key==='Home') target=competencyTabs[0];
+      if(event.key==='End') target=competencyTabs[competencyTabs.length-1];
+      if(!target) return;
+      event.preventDefault();
+      target.focus();
+      selectCompetency(target);
+    });
+  });
+  selectCompetency(competencyTabs[0]);
+  if('IntersectionObserver' in w){
+    const competencyObserver=new IntersectionObserver(entries=>{
+      if(!entries.some(entry=>entry.isIntersecting)) return;
+      competencyExplorer.classList.add('is-ready');
+      competencyObserver.disconnect();
+    },{threshold:.18});
+    competencyObserver.observe(competencyExplorer);
+  }else competencyExplorer.classList.add('is-ready');
+}
 
 // Purposeful hero model: each node explains a connected part of the operating system.
 const systemMessages={
