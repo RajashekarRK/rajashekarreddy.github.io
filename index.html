@@ -994,37 +994,31 @@ if(!isTouch){
 // Audio
 const AC=w.AudioContext||w.webkitAudioContext;
 let ac=null, masterGain=null, soundEnabled=true, audioUnlocked=false;
-const drones={};
 const sectionVolumes={hero:0,about:0,work:0,writing:0,contact:0};
 function initAudio(){
   if(!AC || ac) return;
   ac=new AC();
-  masterGain=ac.createGain(); masterGain.gain.value=.22; masterGain.connect(ac.destination);
-  drones.hero=createDrone(80,'sine',.08);
-  drones.about=createDrone(150,'sine',.1); drones.about2=createDrone(152,'sine',.06);
-  drones.work=createDrone(120,'triangle',.07);
-  drones.writing=createDrone(200,'sine',.06);
-  drones.contact=createDrone(60,'triangle',.09);
-  audioUnlocked=true; updateDroneVolumes();
+  masterGain=ac.createGain(); masterGain.gain.value=1; masterGain.connect(ac.destination);
+  createOmDrone(); audioUnlocked=true;
 }
-function createDrone(freq,type,vol){ const o=ac.createOscillator(), g=ac.createGain(); o.type=type; o.frequency.value=freq; g.gain.value=0; o.connect(g); g.connect(masterGain); o.start(); return {o,g,vol}; }
-function updateDroneVolumes(){
+function createOmDrone(){
+  const omGain=ac.createGain(); omGain.gain.value=.05;
+  const toneFilter=ac.createBiquadFilter(); toneFilter.type='lowpass'; toneFilter.frequency.value=520; toneFilter.Q.value=.35;
+  [[136.1,.62],[272.2,.2],[408.3,.1]].forEach(([frequency,level])=>{const oscillator=ac.createOscillator(), gain=ac.createGain();oscillator.type='sine';oscillator.frequency.value=frequency;gain.gain.value=level;oscillator.connect(gain);gain.connect(toneFilter);oscillator.start();});
+  toneFilter.connect(omGain); omGain.connect(masterGain);
+}
+function updateDroneVolumes(){}
+function playDamaruTap(){
   if(!ac || !soundEnabled) return;
-  Object.keys(drones).forEach(k=>{
-    if(k==='about2') return;
-    const dr=drones[k], target=k==='about'?sectionVolumes.about*dr.vol:sectionVolumes[k]*dr.vol;
-    dr.g.gain.setTargetAtTime(target, ac.currentTime, .25);
-    if(k==='about' && drones.about2) drones.about2.g.gain.setTargetAtTime(sectionVolumes.about*drones.about2.vol, ac.currentTime, .25);
-  });
+  const now=ac.currentTime;
+  [0,.075].forEach((offset,index)=>{const duration=.09, buffer=ac.createBuffer(1,Math.floor(ac.sampleRate*duration),ac.sampleRate), data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*Math.exp(-i/(ac.sampleRate*.018));const noise=ac.createBufferSource(), filter=ac.createBiquadFilter(), gain=ac.createGain();noise.buffer=buffer;filter.type='bandpass';filter.frequency.value=index?620:520;filter.Q.value=3.2;gain.gain.setValueAtTime(.1,now+offset);gain.gain.exponentialRampToValueAtTime(.001,now+offset+duration);noise.connect(filter);filter.connect(gain);gain.connect(masterGain);noise.start(now+offset);});
 }
-function playHover(){ if(!ac || !soundEnabled) return; const o=ac.createOscillator(), g=ac.createGain(); o.type='sine'; o.frequency.value=420+Math.random()*260; g.gain.setValueAtTime(.03,ac.currentTime); g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.08); o.connect(g); g.connect(masterGain); o.start(); o.stop(ac.currentTime+.08); }
-function playClick(){ if(!ac || !soundEnabled) return; const o=ac.createOscillator(), g=ac.createGain(); o.type='triangle'; o.frequency.value=220; g.gain.setValueAtTime(.04,ac.currentTime); g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.12); o.connect(g); g.connect(masterGain); o.start(); o.stop(ac.currentTime+.12); }
 const soundBtn=$('.nav-sound');
 function updateSoundIcon(){ soundBtn.classList.toggle('mute',!soundEnabled); soundBtn.querySelector('.snd-on').style.display=soundEnabled?'block':'none'; soundBtn.querySelector('.snd-off').style.display=soundEnabled?'none':'block'; }
-function toggleSound(){ soundEnabled=!soundEnabled; if(!ac) initAudio(); if(ac && masterGain) masterGain.gain.setTargetAtTime(soundEnabled?.22:0, ac.currentTime, .1); updateSoundIcon(); }
+function toggleSound(){ soundEnabled=!soundEnabled; if(!ac) initAudio(); if(ac && masterGain) masterGain.gain.setTargetAtTime(soundEnabled?1:0, ac.currentTime, .1); updateSoundIcon(); }
 soundBtn.addEventListener('click',toggleSound);
 w.addEventListener('keydown',e=>{ if(e.key.toLowerCase()==='m') toggleSound(); });
-$$('a,button,.card,.bcard,.ctl,.tag,.aw,.edu,.stat,.sf,.pub-card').forEach(el=>{ el.addEventListener('mouseenter',playHover); el.addEventListener('click',()=>{ playClick(); if(!ac) initAudio(); }); el.addEventListener('touchstart',()=>{ if(!ac) initAudio(); },{passive:true}); });
+$$('a,button,.card,.bcard,.ctl,.tag,.aw,.edu,.stat,.sf,.pub-card').forEach(el=>{ el.addEventListener('click',()=>{ if(!ac) initAudio(); playDamaruTap(); }); el.addEventListener('touchstart',()=>{ if(!ac) initAudio(); },{passive:true}); });
 
 // Three.js
 let sceneWeight={hero:1,about:0,work:0,writing:0,contact:0};
