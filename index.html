@@ -86,7 +86,7 @@ img{max-width:100%;display:block}
 @media (max-width:768px),(hover:none){.cr{display:none}body,button,a{cursor:auto}}
 
 #bg{position:fixed;inset:0;z-index:0;width:100%;height:100%;opacity:.72;pointer-events:none}
-.site-bg-image{position:fixed;inset:0;z-index:0;pointer-events:none;background:center/cover no-repeat url('assets/images/cosmic-vishnu-background.png');opacity:.05}
+.site-bg-image{position:fixed;inset:0;z-index:0;pointer-events:none;background:center/cover no-repeat url('assets/images/cosmic-vishnu-background.png');opacity:.03}
 .vg{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 75% 60% at 50% 0%,rgba(159,197,255,.055) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 15% 100%,rgba(52,191,253,.04) 0%,transparent 55%),radial-gradient(circle at 85% 20%,rgba(94,134,220,.025) 0%,transparent 35%);mix-blend-mode:screen}
 .grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
 .bg-orb{display:none}
@@ -1057,7 +1057,27 @@ function initThree(){
   addWire(new THREE.SphereGeometry(1.6,20,20),0x34bffd,[-10,-1,-2],1,[.0015,.001,0]);
   const bigSphere=new THREE.Mesh(new THREE.SphereGeometry(5,24,24), new THREE.MeshBasicMaterial({color:0x9fc5ff,wireframe:true,transparent:true,opacity:.025})); bigSphere.position.set(12,-10,-8); scene.add(bigSphere);
   const midSphere=new THREE.Mesh(new THREE.SphereGeometry(2.5,20,20), new THREE.MeshBasicMaterial({color:0x34bffd,wireframe:true,transparent:true,opacity:.02})); midSphere.position.set(-11,6,-10); scene.add(midSphere);
-  const pCount=w.innerWidth<768?220:440;
+  const celestial=[];
+  function addCelestial(pos,radius,color,depth,ring){
+    const group=new THREE.Group(); group.position.set(...pos);
+    const body=new THREE.Mesh(new THREE.SphereGeometry(radius,18,18),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.16})); group.add(body);
+    const halo=new THREE.Mesh(new THREE.SphereGeometry(radius*1.12,16,16),new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity:.11,depthWrite:false})); group.add(halo);
+    if(ring){const orbit=new THREE.Mesh(new THREE.TorusGeometry(radius*1.55,.018,6,48),new THREE.MeshBasicMaterial({color:0x9fc5ff,transparent:true,opacity:.16}));orbit.rotation.set(.9,.25,.18);group.add(orbit);}
+    scene.add(group); celestial.push({group,basePos:pos,depth});
+  }
+  addCelestial([-13,8,-15],.72,0x5e86dc,.18,true);
+  addCelestial([11,6,-13],.46,0x34bffd,.11,false);
+  const starFields=[];
+  function addStarField(count,spread,size,opacity,depth){
+    const geo=new THREE.BufferGeometry(), positions=new Float32Array(count*3), colors=new Float32Array(count*3);
+    const hues=[new THREE.Color(0xffffff),new THREE.Color(0xbfe4ff),new THREE.Color(0x9fc5ff),new THREE.Color(0x6f9be6)];
+    for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*spread;positions[i*3+1]=(Math.random()-.5)*spread*.72;positions[i*3+2]=-12-Math.random()*spread;const hue=hues[Math.floor(Math.random()*hues.length)];colors[i*3]=hue.r;colors[i*3+1]=hue.g;colors[i*3+2]=hue.b;}
+    geo.setAttribute('position',new THREE.BufferAttribute(positions,3));geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+    const stars=new THREE.Points(geo,new THREE.PointsMaterial({size,transparent:true,opacity,blending:THREE.AdditiveBlending,depthWrite:false,vertexColors:true}));scene.add(stars);starFields.push({stars,depth});
+  }
+  addStarField(w.innerWidth<768?420:900,105,.055,.72,.05);
+  addStarField(w.innerWidth<768?110:220,58,.13,.62,.16);
+  const pCount=w.innerWidth<768?300:620;
   const pGeo=new THREE.BufferGeometry();
   const pPos=new Float32Array(pCount*3), pBaseY=new Float32Array(pCount), pSize=new Float32Array(pCount), pColor=new Float32Array(pCount*3);
   const palette=[new THREE.Color(0x9fc5ff),new THREE.Color(0x34bffd),new THREE.Color(0x5e86dc),new THREE.Color(0x6f9be6)];
@@ -1078,6 +1098,8 @@ function initThree(){
     for(let i=0;i<pCount;i++){ positions[i*3+1]=pBaseY[i]+Math.sin(time*.3+i)*.18; }
     pGeo.attributes.position.needsUpdate=true;
     objs.forEach((o,i)=>{ o.m.rotation.x+=o.rs[0]; o.m.rotation.y+=o.rs[1]; o.m.rotation.z+=o.rs[2]; o.m.position.y=o.basePos[1]+Math.sin(time*.4+i)*.8; });
+    starFields.forEach((field,index)=>{field.stars.rotation.y+=.000025*(index+1);field.stars.position.x=tx*field.depth;field.stars.position.y=-ty*field.depth;});
+    celestial.forEach((item,index)=>{item.group.rotation.y+=.0015+index*.0004;item.group.rotation.x+=.00025;item.group.position.x=item.basePos[0]+tx*item.depth;item.group.position.y=item.basePos[1]-ty*item.depth+Math.sin(time*.22+index)*.35;});
     bigSphere.rotation.y+=.0004; bigSphere.rotation.x+=.0002;
     midSphere.rotation.y+=.0003; midSphere.rotation.z+=.00015;
     const total=Math.max(.001, sceneWeight.hero+sceneWeight.about+sceneWeight.work+sceneWeight.writing+sceneWeight.contact);
